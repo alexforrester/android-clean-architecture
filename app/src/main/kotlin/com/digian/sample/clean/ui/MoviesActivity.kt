@@ -1,4 +1,4 @@
-package com.digian.example.moshicodegen.ui
+package com.digian.sample.clean.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

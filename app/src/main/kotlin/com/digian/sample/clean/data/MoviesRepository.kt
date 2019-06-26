@@ -1,4 +1,4 @@
-package com.digian.example.moshicodegen.data
+package com.digian.sample.clean.data
 
 import android.content.Context
 import androidx.lifecycle.LiveData

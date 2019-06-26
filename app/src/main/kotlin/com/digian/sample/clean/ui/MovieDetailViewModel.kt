@@ -1,12 +1,12 @@
-package com.digian.example.moshicodegen.ui
+package com.digian.sample.clean.ui
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.digian.example.moshicodegen.data.Movie
-import com.digian.example.moshicodegen.data.PopularMoviesRepository
-import com.digian.example.moshicodegen.data.PopularMoviesRepositoryImpl
+import com.digian.sample.clean.data.Movie
+import com.digian.sample.clean.data.PopularMoviesRepository
+import com.digian.sample.clean.data.PopularMoviesRepositoryImpl
 
 
 /**

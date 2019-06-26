@@ -1,4 +1,4 @@
-package com.digian.example.moshicodegen
+package com.digian.sample.clean
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
@@ -9,7 +9,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.digian.example.moshicodegen.ui.MoviesActivity
+import com.digian.sample.clean.ui.MoviesActivity
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

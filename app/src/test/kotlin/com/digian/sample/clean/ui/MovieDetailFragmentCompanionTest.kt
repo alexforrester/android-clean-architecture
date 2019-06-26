@@ -1,6 +1,6 @@
-package com.digian.example.moshicodegen.ui
+package com.digian.sample.clean.ui
 
-import com.digian.example.moshicodegen.data.Genre
+import com.digian.sample.clean.data.Genre
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

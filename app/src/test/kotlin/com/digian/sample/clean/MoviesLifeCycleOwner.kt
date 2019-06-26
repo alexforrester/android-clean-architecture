@@ -1,4 +1,4 @@
-package com.digian.example.moshicodegen
+package com.digian.sample.clean
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner

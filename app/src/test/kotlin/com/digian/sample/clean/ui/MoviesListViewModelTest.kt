@@ -1,12 +1,12 @@
-package com.digian.example.moshicodegen.ui
+package com.digian.sample.clean.ui
 
 import androidx.lifecycle.Observer
-import com.digian.example.moshicodegen.InstantExecutorExtension
-import com.digian.example.moshicodegen.MoviesLifeCycleOwner
-import com.digian.example.moshicodegen.data.ASSET_BASE_PATH
-import com.digian.example.moshicodegen.data.Movie
-import com.digian.example.moshicodegen.data.PopularMoviesRepository
-import com.digian.example.moshicodegen.data.PopularMoviesRepositoryImpl
+import com.digian.sample.clean.InstantExecutorExtension
+import com.digian.sample.clean.MoviesLifeCycleOwner
+import com.digian.sample.clean.data.ASSET_BASE_PATH
+import com.digian.sample.clean.data.Movie
+import com.digian.sample.clean.data.PopularMoviesRepository
+import com.digian.sample.clean.data.PopularMoviesRepositoryImpl
 import io.mockk.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -21,7 +21,7 @@ internal class MoviesListViewModelTest {
 
     private val moviesListViewModel: MoviesListViewModel = object : MoviesListViewModel(mockk()) {
 
-        override fun getRepository() :  PopularMoviesRepository = object :
+        override fun getRepository() : PopularMoviesRepository = object :
             PopularMoviesRepositoryImpl(mockk()) {
 
             override fun getInputStreamForJsonFile(fileName: String): InputStream {

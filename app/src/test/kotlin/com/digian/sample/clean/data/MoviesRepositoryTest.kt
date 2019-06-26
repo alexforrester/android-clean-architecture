@@ -1,8 +1,8 @@
-package com.digian.example.moshicodegen.data
+package com.digian.sample.clean.data
 
 import androidx.lifecycle.Observer
-import com.digian.example.moshicodegen.InstantExecutorExtension
-import com.digian.example.moshicodegen.MoviesLifeCycleOwner
+import com.digian.sample.clean.InstantExecutorExtension
+import com.digian.sample.clean.MoviesLifeCycleOwner
 import io.mockk.*
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals

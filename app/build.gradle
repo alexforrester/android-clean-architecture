@@ -21,7 +21,11 @@ android {
         }
     }
     sourceSets {
+
         main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+
     }
 }
 
@@ -42,6 +46,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.navigation:navigation-fragment-ktx:2.1.0-alpha02"
     implementation "androidx.navigation:navigation-ui-ktx:2.1.0-alpha02"
+
 
     //Moshi Core Artifact
     implementation "com.squareup.moshi:moshi:$moshi_version"

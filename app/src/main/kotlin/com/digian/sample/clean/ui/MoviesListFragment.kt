@@ -1,4 +1,4 @@
-package com.digian.example.moshicodegen.ui
+package com.digian.sample.clean.ui
 
 
 import android.os.Bundle
@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.digian.example.moshicodegen.data.Movie
+import com.digian.sample.clean.data.Movie
 import com.digian.sample.clean.R
 import kotlinx.android.synthetic.main.fragment_movies.*
 

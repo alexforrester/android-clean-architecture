@@ -1,4 +1,4 @@
-package com.digian.example.moshicodegen.data
+package com.digian.sample.clean.data
 
 /**
  * Created by Alex Forrester on 2019-04-26.

@@ -1,10 +1,10 @@
-package com.digian.example.moshicodegen.ui
+package com.digian.sample.clean.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.digian.example.moshicodegen.data.Movie
+import com.digian.sample.clean.data.Movie
 import com.digian.sample.clean.R
 
 

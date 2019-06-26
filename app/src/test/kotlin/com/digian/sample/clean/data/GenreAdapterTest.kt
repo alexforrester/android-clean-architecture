@@ -1,4 +1,4 @@
-package com.digian.example.moshicodegen.data
+package com.digian.sample.clean.data
 
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi

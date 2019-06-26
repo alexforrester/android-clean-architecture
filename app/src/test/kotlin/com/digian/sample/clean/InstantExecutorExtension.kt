@@ -1,4 +1,4 @@
-package com.digian.example.moshicodegen
+package com.digian.sample.clean
 
 import androidx.arch.core.executor.ArchTaskExecutor
 import androidx.arch.core.executor.TaskExecutor
