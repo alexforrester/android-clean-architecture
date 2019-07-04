@@ -1,4 +1,4 @@
-package com.digian.sample.clean.movies.domain.usecases.entities
+package com.digian.sample.clean.features.movies.domain.entities
 
 /**
  * Created by Alex Forrester on 11/04/2019.

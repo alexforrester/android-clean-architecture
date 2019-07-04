@@ -1,10 +1,10 @@
-package com.digian.sample.clean.movies
+package com.digian.sample.clean.features.movies
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.digian.sample.clean.movies.data.model.MovieData
+import com.digian.sample.clean.features.movies.data.model.MovieData
 import com.digian.sample.clean.R
 
 

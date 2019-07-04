@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/moviesListFragment"
-            android:name="com.digian.sample.clean.movies.MoviesListFragment"
+            android:name="com.digian.sample.clean.features.movies.MoviesListFragment"
             android:label="Blank"
             tools:layout="@layout/fragment_movies">
 
@@ -20,7 +20,7 @@
 
     <fragment
             android:id="@+id/movieDetailFragment"
-            android:name="com.digian.sample.clean.movies.MovieDetailFragment"
+            android:name="com.digian.sample.clean.features.movies.MovieDetailFragment"
             android:label="Blank"
             tools:layout="@layout/fragment_movie_detail"/>
 

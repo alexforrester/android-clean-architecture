@@ -1,11 +1,11 @@
-package com.digian.sample.clean.movies
+package com.digian.sample.clean.features.movies
 
 import androidx.lifecycle.Observer
 import com.digian.sample.clean.InstantExecutorExtension
 import com.digian.sample.clean.MoviesLifeCycleOwner
-import com.digian.sample.clean.movies.data.*
-import com.digian.sample.clean.movies.data.model.GenreData
-import com.digian.sample.clean.movies.data.model.MovieData
+import com.digian.sample.clean.features.movies.data.*
+import com.digian.sample.clean.features.movies.data.model.GenreData
+import com.digian.sample.clean.features.movies.data.model.MovieData
 import io.mockk.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -36,6 +36,7 @@ internal class MovieDataDetailViewModelTest {
         every{ observer.onChanged(any()) } just Runs
 
         moviesDetailViewModel.getMovie(278).observe(MoviesLifeCycleOwner(), observer)
+        moviesDetailViewModel.loadMovie()
 
         verify { observer.onChanged(any()) }
         verify { observer.onChanged(ofType(MovieData::class))}
@@ -63,6 +64,7 @@ internal class MovieDataDetailViewModelTest {
 
         //Verifying observer called when no movie found
         moviesDetailViewModel.getMovie(UNKNOWN_MOVIE_ID).observe(MoviesLifeCycleOwner(), observer)
+        moviesDetailViewModel.loadMovie()
 
         verify { observer.onChanged(any())}
         verify { observer.onChanged(isNull())}

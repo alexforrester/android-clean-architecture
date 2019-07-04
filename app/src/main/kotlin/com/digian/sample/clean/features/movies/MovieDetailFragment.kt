@@ -1,4 +1,4 @@
-package com.digian.sample.clean.movies
+package com.digian.sample.clean.features.movies
 
 
 import android.net.Uri
@@ -14,8 +14,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.digian.sample.clean.movies.data.model.GenreData
-import com.digian.sample.clean.movies.data.model.MovieData
+import com.digian.sample.clean.features.movies.data.model.GenreData
+import com.digian.sample.clean.features.movies.data.model.MovieData
 import com.digian.sample.clean.R
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -89,6 +89,7 @@ class MovieDetailFragment : Fragment() {
                 addErrorView()
 
             })
+        movieDetailViewModel.loadMovie()
     }
 
     private fun addErrorView() {

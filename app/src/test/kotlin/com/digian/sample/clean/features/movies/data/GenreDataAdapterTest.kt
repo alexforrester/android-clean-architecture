@@ -1,6 +1,6 @@
-package com.digian.sample.clean.movies.data
+package com.digian.sample.clean.features.movies.data
 
-import com.digian.sample.clean.movies.data.model.GenreData
+import com.digian.sample.clean.features.movies.data.model.GenreData
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types

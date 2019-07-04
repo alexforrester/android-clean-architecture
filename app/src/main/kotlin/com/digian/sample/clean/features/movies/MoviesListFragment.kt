@@ -1,4 +1,4 @@
-package com.digian.sample.clean.movies
+package com.digian.sample.clean.features.movies
 
 
 import android.os.Bundle
@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.digian.sample.clean.movies.data.model.MovieData
+import com.digian.sample.clean.features.movies.data.model.MovieData
 import com.digian.sample.clean.R
 import kotlinx.android.synthetic.main.fragment_movies.*
 
@@ -59,5 +59,7 @@ class MoviesListFragment : Fragment() {
             Observer<List<MovieData>> { popularMovies ->
                 moviesListAdapter.data = popularMovies
             })
+
+        moviesListViewModel.loadMovies()
     }
 }

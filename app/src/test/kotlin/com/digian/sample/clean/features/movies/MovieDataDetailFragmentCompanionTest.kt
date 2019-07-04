@@ -1,6 +1,6 @@
-package com.digian.sample.clean.movies
+package com.digian.sample.clean.features.movies
 
-import com.digian.sample.clean.movies.data.model.GenreData
+import com.digian.sample.clean.features.movies.data.model.GenreData
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

@@ -9,7 +9,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.digian.sample.clean.movies.MoviesActivity
+import com.digian.sample.clean.features.movies.MoviesActivity
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -82,9 +82,6 @@ class MoviesListScreenTest {
         onView(withText(movieVotes)).check(matches(isDisplayed()))
         onView(withText(movieGenres)).check(matches(isDisplayed()))
         onView(withId(R.id.movie_image)).check(matches(isDisplayed()))
-
     }
-
-
 
 }
