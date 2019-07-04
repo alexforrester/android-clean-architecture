@@ -1,4 +1,4 @@
-package com.digian.sample.clean.ui
+package com.digian.sample.clean.movies
 
 
 import android.os.Bundle
@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.digian.sample.clean.data.Movie
+import com.digian.sample.clean.movies.data.model.MovieData
 import com.digian.sample.clean.R
 import kotlinx.android.synthetic.main.fragment_movies.*
 
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_movies.*
 class MoviesListFragment : Fragment() {
 
     private lateinit var moviesRecyclerView: RecyclerView
-    private lateinit var moviesAdapter: MoviesAdapter
+    private lateinit var moviesListAdapter: MoviesListAdapter
     private lateinit var moviesViewManager: RecyclerView.LayoutManager
     private lateinit var moviesListViewModel: MoviesListViewModel
 
@@ -39,9 +39,9 @@ class MoviesListFragment : Fragment() {
 
         moviesListViewModel = ViewModelProviders.of(this).get(MoviesListViewModel::class.java)
         moviesViewManager = LinearLayoutManager(this.context)
-        moviesAdapter = MoviesAdapter(object : OnItemClickListener {
-            override fun onItemClick(movie: Movie) {
-                val action = MoviesListFragmentDirections.actionMoviesFragmentToMovieDetailFragment(movie.id)
+        moviesListAdapter = MoviesListAdapter(object : OnItemClickListener {
+            override fun onItemClick(movieData: MovieData) {
+                val action = MoviesListFragmentDirections.actionMoviesFragmentToMovieDetailFragment(movieData.id)
                 findNavController().navigate(action)
             }
         })
@@ -50,14 +50,14 @@ class MoviesListFragment : Fragment() {
             setHasFixedSize(true)
 
             layoutManager = moviesViewManager
-            adapter = moviesAdapter
+            adapter = moviesListAdapter
 
             addItemDecoration(DividerItemDecoration(context, (layoutManager as LinearLayoutManager).orientation))
         }
 
         moviesListViewModel.getMovies().observe(this,
-            Observer<List<Movie>> { popularMovies ->
-                moviesAdapter.data = popularMovies
+            Observer<List<MovieData>> { popularMovies ->
+                moviesListAdapter.data = popularMovies
             })
     }
 }

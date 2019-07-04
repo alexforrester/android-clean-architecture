@@ -9,7 +9,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.digian.sample.clean.ui.MoviesActivity
+import com.digian.sample.clean.movies.MoviesActivity
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

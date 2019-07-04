@@ -1,12 +1,12 @@
-package com.digian.sample.clean.ui
+package com.digian.sample.clean.movies
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.digian.sample.clean.data.Movie
-import com.digian.sample.clean.data.PopularMoviesRepository
-import com.digian.sample.clean.data.PopularMoviesRepositoryImpl
+import com.digian.sample.clean.movies.data.model.MovieData
+import com.digian.sample.clean.movies.data.PopularMoviesRepository
+import com.digian.sample.clean.movies.data.MoviesRepositoryImpl
 
 
 /**
@@ -16,7 +16,7 @@ open class MovieDetailViewModel(application: Application) : AndroidViewModel(app
 
     private val popularMoviesRepository: PopularMoviesRepository = getRepository()
 
-    fun getMovie(movieId : Int) : LiveData<Movie> {
+    fun getMovie(movieId : Int) : LiveData<MovieData> {
 
         return Transformations.map(popularMoviesRepository.getMovies()) {
             movieList -> movieList.find { it.id == movieId}
@@ -24,6 +24,6 @@ open class MovieDetailViewModel(application: Application) : AndroidViewModel(app
     }
 
     internal open fun getRepository() : PopularMoviesRepository {
-        return PopularMoviesRepositoryImpl(getApplication())
+        return MoviesRepositoryImpl(getApplication())
     }
 }

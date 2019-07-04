@@ -1,26 +1,17 @@
-package com.digian.sample.clean.data
+package com.digian.sample.clean.movies.data
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.digian.sample.clean.movies.data.model.MovieData
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import java.io.IOException
 import java.io.InputStream
 
-/**
- * Created by Alex Forrester on 17/04/2019.
- *
- * Read in a flat file json list of movies from Assets folder and deserializes to list of movies before creating LiveData object
- *
- * The Live Data object is initialised with a value when {@link #getMovies() getMovies} is called which will be emitted when observer added
- *
- * No caching or optimisation is preformed for this example
- *
- */
 internal interface PopularMoviesRepository {
-    fun getMovies(): LiveData<List<Movie>>
+    fun getMovies(): LiveData<List<MovieData>>
 }
 
 internal object MoshiFactory {
@@ -32,21 +23,21 @@ internal object MoshiFactory {
     fun getInstance() = moshi
 }
 
-internal open class PopularMoviesRepositoryImpl(
+internal open class MoviesRepositoryImpl(
     private val context: Context,
     private val moshi: Moshi = MoshiFactory.getInstance()) : PopularMoviesRepository {
 
-    private val moviesLiveData = MutableLiveData<List<Movie>>()
+    private val moviesLiveData = MutableLiveData<List<MovieData>>()
 
     /**
      * Sets and returns the LiveData object so observers will be notified of the last change
      */
-    override fun getMovies() : LiveData<List<Movie>> {
+    override fun getMovies() : LiveData<List<MovieData>> {
 
         val moviesJson = getMovieJSON()
 
-        val listType = Types.newParameterizedType(List::class.java, Movie::class.java)
-        val adapter: JsonAdapter<List<Movie>> = moshi.adapter(listType)
+        val listType = Types.newParameterizedType(List::class.java, MovieData::class.java)
+        val adapter: JsonAdapter<List<MovieData>> = moshi.adapter(listType)
         val result = adapter.fromJson(moviesJson)
 
         moviesLiveData.value = result

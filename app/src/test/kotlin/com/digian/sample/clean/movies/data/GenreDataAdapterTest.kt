@@ -1,5 +1,6 @@
-package com.digian.sample.clean.data
+package com.digian.sample.clean.movies.data
 
+import com.digian.sample.clean.movies.data.model.GenreData
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -9,12 +10,16 @@ import org.junit.jupiter.api.Test
 /**
  * Created by Alex Forrester on 2019-04-27.
  */
-internal class GenreAdapterTest {
+internal class GenreDataAdapterTest {
 
-    val genres = listOf(Genre(28,"Action"),Genre(12, "Adventure"),Genre(16, "Animation"))
+    val genres = listOf(
+        GenreData(28, "Action"),
+        GenreData(12, "Adventure"),
+        GenreData(16, "Animation")
+    )
     val moshi = Moshi.Builder().add(GenreAdapter()).build()
-    val listType = Types.newParameterizedType(List::class.java, Genre::class.java)
-    val adapter: JsonAdapter<List<Genre>> = moshi.adapter(listType)
+    val listType = Types.newParameterizedType(List::class.java, GenreData::class.java)
+    val adapter: JsonAdapter<List<GenreData>> = moshi.adapter(listType)
 
     @Test
     internal fun `given list of genres to serialise to json, when custom adapter used, then array of Ints created`() {

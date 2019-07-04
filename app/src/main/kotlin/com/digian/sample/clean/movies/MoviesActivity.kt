@@ -1,4 +1,4 @@
-package com.digian.sample.clean.ui
+package com.digian.sample.clean.movies
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

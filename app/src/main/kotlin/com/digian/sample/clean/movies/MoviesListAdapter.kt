@@ -1,24 +1,24 @@
-package com.digian.sample.clean.ui
+package com.digian.sample.clean.movies
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.digian.sample.clean.data.Movie
+import com.digian.sample.clean.movies.data.model.MovieData
 import com.digian.sample.clean.R
 
 
 /**
  * Created by Alex Forrester on 17/04/2019.
  */
-internal class MoviesAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
+internal class MoviesListAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<MoviesListAdapter.MovieViewHolder>() {
 
-    internal var data: List<Movie>? = null
+    internal var data: List<MovieData>? = null
 
     class MovieViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView) {
-        fun bind(movie: Movie, onItemClickListener: OnItemClickListener) {
+        fun bind(movieData: MovieData, onItemClickListener: OnItemClickListener) {
             textView.setOnClickListener {
-                onItemClickListener.onItemClick(movie)
+                onItemClickListener.onItemClick(movieData)
             }
         }
     }
@@ -46,5 +46,5 @@ internal class MoviesAdapter(private val onItemClickListener: OnItemClickListene
 }
 
 internal interface OnItemClickListener {
-    fun onItemClick(movie : Movie)
+    fun onItemClick(movieData : MovieData)
 }

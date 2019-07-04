@@ -6,6 +6,7 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 28
+
     defaultConfig {
         applicationId "com.digian.sample.clean"
         minSdkVersion 21
@@ -14,19 +15,20 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets {
 
+    sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         test.java.srcDirs += 'src/test/kotlin'
         androidTest.java.srcDirs += 'src/androidTest/kotlin'
-
     }
+
     lintOptions {
         disable 'AllowBackup', 'IconMissingDensityFolder'
         abortOnError true
@@ -35,7 +37,6 @@ android {
 }
 
 dependencies {
-    //Dependency versions added directly, for real project would be added in top level gradle file with extension properties
 
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -51,7 +52,6 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.navigation:navigation-fragment-ktx:$androidx_navigation_ktx_version"
     implementation "androidx.navigation:navigation-ui-ktx:$androidx_navigation_ktx_version"
-
 
     //Moshi Core Artifact and Codegen
     implementation "com.squareup.moshi:moshi:$moshi_version"

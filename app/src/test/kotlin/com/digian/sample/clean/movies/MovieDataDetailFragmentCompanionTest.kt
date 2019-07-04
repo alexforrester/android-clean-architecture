@@ -1,16 +1,20 @@
-package com.digian.sample.clean.ui
+package com.digian.sample.clean.movies
 
-import com.digian.sample.clean.data.Genre
+import com.digian.sample.clean.movies.data.model.GenreData
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 /**
  * Created by Alex Forrester on 2019-04-28.
  */
-internal class MovieDetailFragmentCompanionTest {
+internal class MovieDataDetailFragmentCompanionTest {
 
-    private val genres = listOf(Genre(28,"Action"), Genre(12, "Adventure"), Genre(16, "Animation"))
-    private val emptyGenres = emptyList<Genre>()
+    private val genres = listOf(
+        GenreData(28, "Action"),
+        GenreData(12, "Adventure"),
+        GenreData(16, "Animation")
+    )
+    private val emptyGenres = emptyList<GenreData>()
 
 
     @Test

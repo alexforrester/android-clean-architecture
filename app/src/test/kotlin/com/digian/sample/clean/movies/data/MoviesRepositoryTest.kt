@@ -1,8 +1,10 @@
-package com.digian.sample.clean.data
+package com.digian.sample.clean.movies.data
 
 import androidx.lifecycle.Observer
 import com.digian.sample.clean.InstantExecutorExtension
 import com.digian.sample.clean.MoviesLifeCycleOwner
+import com.digian.sample.clean.movies.data.model.GenreData
+import com.digian.sample.clean.movies.data.model.MovieData
 import io.mockk.*
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -21,7 +23,7 @@ const val ASSET_BASE_PATH = "../app/src/main/assets/"
 internal class PopularPopularMoviesRepositoryTest {
 
     private val popularMoviesRepository: PopularMoviesRepository = object :
-        PopularMoviesRepositoryImpl(mockk()) {
+        MoviesRepositoryImpl(mockk()) {
 
         override fun getInputStreamForJsonFile(fileName: String): InputStream {
             return FileInputStream(ASSET_BASE_PATH + fileName)
@@ -31,7 +33,7 @@ internal class PopularPopularMoviesRepositoryTest {
     @Test
     internal fun `given live data movie list is initialised, when observer added, then observer notified`() {
 
-        val observer = mockk<Observer<List<Movie>>>()
+        val observer = mockk<Observer<List<MovieData>>>()
         every{ observer.onChanged(any()) } just Runs
 
         popularMoviesRepository.getMovies().observe(MoviesLifeCycleOwner(), observer)
@@ -62,7 +64,10 @@ internal class PopularPopularMoviesRepositoryTest {
             Executable { assertEquals(12691, movie.voteCount) },
             Executable { assertEquals(278, movie.id) },
             Executable { assertEquals("The Shawshank Redemption", movie.title) },
-            Executable { assertEquals(listOf(Genre(18,"Drama"),Genre(80, "Crime")), movie.genres) },
+            Executable { assertEquals(listOf(
+                GenreData(18, "Drama"),
+                GenreData(80, "Crime")
+            ), movie.genreData) },
             Executable { assertEquals("Framed in the 1940s for the double murder of his wife and her lover, " +
                     "upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. " +
                     "During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- " +

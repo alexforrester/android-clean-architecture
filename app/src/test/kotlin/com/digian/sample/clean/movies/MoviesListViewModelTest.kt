@@ -1,12 +1,12 @@
-package com.digian.sample.clean.ui
+package com.digian.sample.clean.movies
 
 import androidx.lifecycle.Observer
 import com.digian.sample.clean.InstantExecutorExtension
 import com.digian.sample.clean.MoviesLifeCycleOwner
-import com.digian.sample.clean.data.ASSET_BASE_PATH
-import com.digian.sample.clean.data.Movie
-import com.digian.sample.clean.data.PopularMoviesRepository
-import com.digian.sample.clean.data.PopularMoviesRepositoryImpl
+import com.digian.sample.clean.movies.data.ASSET_BASE_PATH
+import com.digian.sample.clean.movies.data.model.MovieData
+import com.digian.sample.clean.movies.data.PopularMoviesRepository
+import com.digian.sample.clean.movies.data.MoviesRepositoryImpl
 import io.mockk.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -22,7 +22,7 @@ internal class MoviesListViewModelTest {
     private val moviesListViewModel: MoviesListViewModel = object : MoviesListViewModel(mockk()) {
 
         override fun getRepository() : PopularMoviesRepository = object :
-            PopularMoviesRepositoryImpl(mockk()) {
+            MoviesRepositoryImpl(mockk()) {
 
             override fun getInputStreamForJsonFile(fileName: String): InputStream {
                 return FileInputStream(ASSET_BASE_PATH + fileName)
@@ -33,7 +33,7 @@ internal class MoviesListViewModelTest {
     @Test
     fun `given getMovies call made, when live data isInitialised, then adding observer emits onChanged`() {
 
-        val observer = mockk<Observer<List<Movie>>>()
+        val observer = mockk<Observer<List<MovieData>>>()
         every { observer.onChanged(any()) } just Runs
 
         moviesListViewModel.getMovies().observe(MoviesLifeCycleOwner(), observer)
