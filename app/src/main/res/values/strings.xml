@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Moshi-Codegen-Sample</string>
+    <string name="app_name">Clean Architecture Sample</string>
     <string name="popular_movies">Popular Movies</string>
     <string name="movie_image">Movie Detail Image</string>
     <string name="movie_detail_loading_error">Error Loading Movie Detail</string>
