@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.digian.sample.clean.features.movies.data.model.MovieData
 import com.digian.sample.clean.R
+import com.digian.sample.clean.core.domain.exception.Failure
 import kotlinx.android.synthetic.main.fragment_movies.*
 
 /**
@@ -55,10 +57,15 @@ class MoviesListFragment : Fragment() {
             addItemDecoration(DividerItemDecoration(context, (layoutManager as LinearLayoutManager).orientation))
         }
 
-        moviesListViewModel.getMovies().observe(this,
+        moviesListViewModel.movies.observe(this,
             Observer<List<MovieData>> { popularMovies ->
                 moviesListAdapter.data = popularMovies
             })
+
+        moviesListViewModel.failure.observe(this,
+            Observer { failure ->
+            Toast.makeText(activity, "failure is $failure", Toast.LENGTH_LONG).show()
+        })
 
         moviesListViewModel.loadMovies()
     }

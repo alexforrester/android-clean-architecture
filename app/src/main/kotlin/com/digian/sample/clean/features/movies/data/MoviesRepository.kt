@@ -40,7 +40,6 @@ internal open class MoviesRepositoryImpl(
             val adapter: JsonAdapter<List<MovieData>> = moshi.adapter(listType)
 
             val movies = adapter.fromJson(moviesJson) ?: listOf()
-            movies
             UseCaseResult.Success(movies)
 
         } catch (jsonDataException: JsonDataException) {
