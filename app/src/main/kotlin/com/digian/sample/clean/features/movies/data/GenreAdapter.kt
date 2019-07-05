@@ -1,6 +1,6 @@
 package com.digian.sample.clean.features.movies.data
 
-import com.digian.sample.clean.features.movies.data.model.GenreData
+import com.digian.sample.clean.features.movies.data.entities.GenreData
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.ToJson
@@ -8,7 +8,7 @@ import com.squareup.moshi.ToJson
 /**
  * Created by Alex Forrester on 2019-04-26.
  *
- * MovieData genreData from the The movie database - https://www.themoviedb.org/
+ * MovieData genresData from the The movie database - https://www.themoviedb.org/
 */
 class GenreAdapter  {
 

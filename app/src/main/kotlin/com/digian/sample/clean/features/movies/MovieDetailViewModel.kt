@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.digian.sample.clean.core.domain.exception.Failure
 import com.digian.sample.clean.core.domain.usecases.BaseUseCase
-import com.digian.sample.clean.features.movies.data.MoviesRepositoryImpl
-import com.digian.sample.clean.features.movies.data.PopularMoviesRepository
-import com.digian.sample.clean.features.movies.data.model.MovieData
+import com.digian.sample.clean.features.movies.data.PopularMoviesRepositoryImpl
+import com.digian.sample.clean.features.movies.domain.PopularMoviesRepository
+import com.digian.sample.clean.features.movies.domain.entities.MovieEntity
 import com.digian.sample.clean.features.movies.domain.usecases.GetMoviesUseCase
 
 
@@ -18,10 +18,10 @@ import com.digian.sample.clean.features.movies.domain.usecases.GetMoviesUseCase
 open class MovieDetailViewModel(application: Application) : AndroidViewModel(application) {
 
     private val getMoviesUseCase: GetMoviesUseCase = GetMoviesUseCase(getRepository())
-    private val movie: MutableLiveData<MovieData> = MutableLiveData()
-    private var movieId = 0
+    private val movie: MutableLiveData<MovieEntity> = MutableLiveData()
+    private var movieId = -1
 
-    fun getMovie(movieId : Int) : LiveData<MovieData>{
+    fun getMovie(movieId : Int) : LiveData<MovieEntity>{
         this.movieId = movieId
         return movie
     }
@@ -31,14 +31,14 @@ open class MovieDetailViewModel(application: Application) : AndroidViewModel(app
     }
 
     internal open fun getRepository() : PopularMoviesRepository {
-        return MoviesRepositoryImpl(getApplication())
+        return PopularMoviesRepositoryImpl(getApplication())
     }
 
     private fun handleFailure(failure: Failure) {
 
     }
 
-    private fun handleSuccess(movies: List<MovieData>) {
+    private fun handleSuccess(movies: List<MovieEntity>) {
 
         this.movie.value = movies.find {
             it.id == movieId

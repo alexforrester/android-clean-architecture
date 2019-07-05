@@ -14,9 +14,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.digian.sample.clean.features.movies.data.model.GenreData
-import com.digian.sample.clean.features.movies.data.model.MovieData
+import com.digian.sample.clean.features.movies.data.entities.GenreData
+import com.digian.sample.clean.features.movies.data.entities.MovieData
 import com.digian.sample.clean.R
+import com.digian.sample.clean.features.movies.domain.entities.GenreEntity
+import com.digian.sample.clean.features.movies.domain.entities.MovieEntity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
@@ -33,7 +35,7 @@ const val PICASSO_RESULT = "PICASSO_RESULT"
 class MovieDetailFragment : Fragment() {
 
     companion object {
-        fun createGenreText(genreData: List<GenreData>): String {
+        fun createGenreText(genreData: List<GenreEntity>): String {
             val genreNames = genreData.map { genre -> genre.name }
 
             if (genreData.isEmpty()) {
@@ -69,10 +71,10 @@ class MovieDetailFragment : Fragment() {
 
         //Loads movie detail and returns from observer or displays error view
         movieDetailViewModel.getMovie(movieId).observe(this,
-            Observer<MovieData> { movie ->
+            Observer<MovieEntity> { movie ->
 
                 movie?.let { movieDetail ->
-                    movieDetail.genreData.let { genres ->
+                    movieDetail.genres.let { genres ->
 
                         if (genres.isNotEmpty()) {
                             movie_genres.visibility = View.VISIBLE

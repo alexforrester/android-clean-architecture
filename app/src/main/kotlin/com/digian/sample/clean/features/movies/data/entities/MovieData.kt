@@ -1,4 +1,4 @@
-package com.digian.sample.clean.features.movies.data.model
+package com.digian.sample.clean.features.movies.data.entities
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -8,11 +8,11 @@ import com.squareup.moshi.JsonClass
  */
 @JsonClass(generateAdapter = true)
 data class MovieData (
-    @Json(name = "vote_count") val voteCount: Int = -1,
     val id: Int,
+    @Json(name = "vote_count") val voteCount: Int = -1,
     val title: String,
     @Json(name = "image_path") val imagePath: String,
-    @Json(name = "genre_ids") val genreData: List<GenreData>,
+    @Json(name = "genre_ids") val genresData: List<GenreData>,
     val overview: String
 )
 

@@ -1,8 +1,11 @@
 package com.digian.sample.clean.features.movies.data
 
 import com.digian.sample.clean.InstantExecutorExtension
-import com.digian.sample.clean.features.movies.data.model.GenreData
-import com.digian.sample.clean.features.movies.data.model.MovieData
+import com.digian.sample.clean.features.movies.data.entities.GenreData
+import com.digian.sample.clean.features.movies.data.entities.MovieData
+import com.digian.sample.clean.features.movies.domain.PopularMoviesRepository
+import com.digian.sample.clean.features.movies.domain.entities.GenreEntity
+import com.digian.sample.clean.features.movies.domain.entities.MovieEntity
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -22,7 +25,7 @@ const val ASSET_BASE_PATH = "../app/src/main/assets/"
 internal class MoviesRepositoryTest {
 
     private val popularMoviesRepository: PopularMoviesRepository = object :
-        MoviesRepositoryImpl(mockk()) {
+        PopularMoviesRepositoryImpl(mockk()) {
 
         override fun getInputStreamForJsonFile(fileName: String): InputStream {
             return FileInputStream(ASSET_BASE_PATH + fileName)
@@ -54,7 +57,7 @@ internal class MoviesRepositoryTest {
             fail("Movie list not returned")
         }, {
 
-            val movie: MovieData = it[1]
+            val movie: MovieEntity = it[1]
 
             assertAll(
 
@@ -65,9 +68,9 @@ internal class MoviesRepositoryTest {
                 Executable {
                     assertEquals(
                         listOf(
-                            GenreData(18, "Drama"),
-                            GenreData(80, "Crime")
-                        ), movie.genreData
+                            GenreEntity(18, "Drama"),
+                            GenreEntity(80, "Crime")
+                        ), movie.genres
                     )
                 },
                 Executable {

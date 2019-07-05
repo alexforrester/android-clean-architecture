@@ -14,9 +14,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.digian.sample.clean.features.movies.data.model.MovieData
+import com.digian.sample.clean.features.movies.data.entities.MovieData
 import com.digian.sample.clean.R
-import com.digian.sample.clean.core.domain.exception.Failure
+import com.digian.sample.clean.features.movies.domain.entities.MovieEntity
 import kotlinx.android.synthetic.main.fragment_movies.*
 
 /**
@@ -42,8 +42,8 @@ class MoviesListFragment : Fragment() {
         moviesListViewModel = ViewModelProviders.of(this).get(MoviesListViewModel::class.java)
         moviesViewManager = LinearLayoutManager(this.context)
         moviesListAdapter = MoviesListAdapter(object : OnItemClickListener {
-            override fun onItemClick(movieData: MovieData) {
-                val action = MoviesListFragmentDirections.actionMoviesFragmentToMovieDetailFragment(movieData.id)
+            override fun onItemClick(movieEntity: MovieEntity) {
+                val action = MoviesListFragmentDirections.actionMoviesFragmentToMovieDetailFragment(movieEntity.id)
                 findNavController().navigate(action)
             }
         })
@@ -58,7 +58,7 @@ class MoviesListFragment : Fragment() {
         }
 
         moviesListViewModel.movies.observe(this,
-            Observer<List<MovieData>> { popularMovies ->
+            Observer<List<MovieEntity>> { popularMovies ->
                 moviesListAdapter.data = popularMovies
             })
 

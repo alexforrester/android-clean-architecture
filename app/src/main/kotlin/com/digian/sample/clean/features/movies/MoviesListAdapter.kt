@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.digian.sample.clean.features.movies.data.model.MovieData
 import com.digian.sample.clean.R
+import com.digian.sample.clean.features.movies.domain.entities.MovieEntity
 
 
 /**
@@ -13,12 +13,12 @@ import com.digian.sample.clean.R
  */
 internal class MoviesListAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<MoviesListAdapter.MovieViewHolder>() {
 
-    internal var data: List<MovieData>? = null
+    internal var data: List<MovieEntity>? = null
 
     class MovieViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView) {
-        fun bind(movieData: MovieData, onItemClickListener: OnItemClickListener) {
+        fun bind(movieEntity: MovieEntity, onItemClickListener: OnItemClickListener) {
             textView.setOnClickListener {
-                onItemClickListener.onItemClick(movieData)
+                onItemClickListener.onItemClick(movieEntity)
             }
         }
     }
@@ -46,5 +46,5 @@ internal class MoviesListAdapter(private val onItemClickListener: OnItemClickLis
 }
 
 internal interface OnItemClickListener {
-    fun onItemClick(movieData : MovieData)
+    fun onItemClick(movieEntity: MovieEntity)
 }

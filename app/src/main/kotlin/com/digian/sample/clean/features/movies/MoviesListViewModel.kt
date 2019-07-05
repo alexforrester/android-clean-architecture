@@ -2,16 +2,13 @@ package com.digian.sample.clean.features.movies
 
 import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.digian.sample.clean.core.domain.exception.Failure
 import com.digian.sample.clean.core.domain.usecases.BaseUseCase
-import com.digian.sample.clean.features.movies.data.MoviesRepositoryImpl
-import com.digian.sample.clean.features.movies.data.PopularMoviesRepository
-import com.digian.sample.clean.features.movies.data.model.MovieData
+import com.digian.sample.clean.features.movies.data.PopularMoviesRepositoryImpl
+import com.digian.sample.clean.features.movies.domain.PopularMoviesRepository
+import com.digian.sample.clean.features.movies.domain.entities.MovieEntity
 import com.digian.sample.clean.features.movies.domain.usecases.GetMoviesUseCase
 
 
@@ -23,10 +20,10 @@ open class MoviesListViewModel(application: Application) : AndroidViewModel(appl
 
     private val getMoviesUseCase: GetMoviesUseCase = GetMoviesUseCase(getRepository())
     val failure: MutableLiveData<Failure> = MutableLiveData()
-    val movies: MutableLiveData<List<MovieData>> = MutableLiveData()
+    val movies: MutableLiveData<List<MovieEntity>> = MutableLiveData()
 
     internal open fun getRepository(): PopularMoviesRepository {
-        return MoviesRepositoryImpl(getApplication())
+        return PopularMoviesRepositoryImpl(getApplication())
     }
 
     fun loadMovies() {
@@ -39,7 +36,7 @@ open class MoviesListViewModel(application: Application) : AndroidViewModel(appl
 
     }
 
-    private fun handleSuccess(movies: List<MovieData>) {
+    private fun handleSuccess(movies: List<MovieEntity>) {
         movies.sortedByDescending {
             it.voteCount
         }

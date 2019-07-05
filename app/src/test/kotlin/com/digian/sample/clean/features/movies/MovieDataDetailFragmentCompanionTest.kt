@@ -1,6 +1,7 @@
 package com.digian.sample.clean.features.movies
 
-import com.digian.sample.clean.features.movies.data.model.GenreData
+import com.digian.sample.clean.features.movies.data.entities.GenreData
+import com.digian.sample.clean.features.movies.domain.entities.GenreEntity
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -10,12 +11,12 @@ import org.junit.jupiter.api.Test
 internal class MovieDataDetailFragmentCompanionTest {
 
     private val genres = listOf(
-        GenreData(28, "Action"),
-        GenreData(12, "Adventure"),
-        GenreData(16, "Animation")
+        GenreEntity(28, "Action"),
+        GenreEntity(12, "Adventure"),
+        GenreEntity(16, "Animation")
     )
-    private val emptyGenres = emptyList<GenreData>()
 
+    private val emptyGenres = emptyList<GenreEntity>()
 
     @Test
     internal fun `given list of genres, when prepared for display print genre strings prepended with GENRES text`() {

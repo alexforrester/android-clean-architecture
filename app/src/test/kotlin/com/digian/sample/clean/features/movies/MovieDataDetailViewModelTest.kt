@@ -4,8 +4,11 @@ import androidx.lifecycle.Observer
 import com.digian.sample.clean.InstantExecutorExtension
 import com.digian.sample.clean.MoviesLifeCycleOwner
 import com.digian.sample.clean.features.movies.data.*
-import com.digian.sample.clean.features.movies.data.model.GenreData
-import com.digian.sample.clean.features.movies.data.model.MovieData
+import com.digian.sample.clean.features.movies.data.entities.GenreData
+import com.digian.sample.clean.features.movies.data.entities.MovieData
+import com.digian.sample.clean.features.movies.domain.PopularMoviesRepository
+import com.digian.sample.clean.features.movies.domain.entities.GenreEntity
+import com.digian.sample.clean.features.movies.domain.entities.MovieEntity
 import io.mockk.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -21,7 +24,7 @@ internal class MovieDataDetailViewModelTest {
     private val moviesDetailViewModel: MovieDetailViewModel = object : MovieDetailViewModel(mockk()) {
 
         override fun getRepository() : PopularMoviesRepository = object :
-            MoviesRepositoryImpl(mockk()) {
+            PopularMoviesRepositoryImpl(mockk()) {
 
             override fun getInputStreamForJsonFile(fileName: String): InputStream {
                 return FileInputStream(ASSET_BASE_PATH + fileName)
@@ -32,21 +35,21 @@ internal class MovieDataDetailViewModelTest {
     @Test
     fun `given valid movie id, when used to retrieve movie, then movie state returned correctly`() {
 
-        val observer = mockk<Observer<MovieData>>()
+        val observer = mockk<Observer<MovieEntity>>()
         every{ observer.onChanged(any()) } just Runs
 
         moviesDetailViewModel.getMovie(278).observe(MoviesLifeCycleOwner(), observer)
         moviesDetailViewModel.loadMovie()
 
         verify { observer.onChanged(any()) }
-        verify { observer.onChanged(ofType(MovieData::class))}
+        verify { observer.onChanged(ofType(MovieEntity::class))}
         verify { observer.onChanged(match { it.title == "The Shawshank Redemption" })}
         verify { observer.onChanged(match { it.voteCount == 12691 })}
-        verify { observer.onChanged(match { it.genreData == listOf(
-            GenreData(
+        verify { observer.onChanged(match { it.genres == listOf(
+            GenreEntity(
                 18,
                 "Drama"
-            ), GenreData(80, "Crime")
+            ), GenreEntity(80, "Crime")
         ) })}
         verify { observer.onChanged(match { it.overview == "Framed in the 1940s for the double murder of his wife and her lover, " +
                 "upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. " +
@@ -59,7 +62,7 @@ internal class MovieDataDetailViewModelTest {
     @Test
     fun `given invalid movie id, when used to retrieve movie, then movie state not set`() {
 
-        val observer = mockk<Observer<MovieData>>()
+        val observer = mockk<Observer<MovieEntity>>()
         every{ observer.onChanged(any()) } just Runs
 
         //Verifying observer called when no movie found
