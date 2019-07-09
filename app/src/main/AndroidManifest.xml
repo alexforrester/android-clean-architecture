@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="com.digian.sample.clean">
+          xmlns:tools="http://schemas.android.com/tools" package="com.digian.clean">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,7 +14,7 @@
             android:networkSecurityConfig="@xml/network_security_config" tools:ignore="GoogleAppIndexingWarning"
             tools:targetApi="n">
 
-        <activity android:name="com.digian.sample.clean.features.movies.MoviesActivity">
+        <activity android:name="com.digian.clean.features.movies.MoviesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

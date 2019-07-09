@@ -6,4 +6,4 @@
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.digian.sample.clean.features.movies.MoviesActivity"/>
+        tools:context="com.digian.clean.features.movies.MoviesActivity"/>

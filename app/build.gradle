@@ -8,7 +8,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId "com.digian.sample.clean"
+        applicationId "com.digian.clean"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
