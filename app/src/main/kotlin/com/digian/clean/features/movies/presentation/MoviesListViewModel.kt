@@ -1,4 +1,4 @@
-package com.digian.clean.features.movies
+package com.digian.clean.features.movies.presentation
 
 import android.app.Application
 import android.util.Log
@@ -6,8 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.digian.clean.core.domain.exception.Failure
 import com.digian.clean.core.domain.usecases.BaseUseCase
-import com.digian.clean.features.movies.data.PopularMoviesRepositoryImpl
-import com.digian.clean.features.movies.domain.PopularMoviesRepository
+import com.digian.clean.features.movies.data.repository.PopularMoviesRepositoryImpl
+import com.digian.clean.features.movies.domain.repository.PopularMoviesRepository
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.digian.clean.features.movies.domain.usecases.GetMoviesUseCase
 
@@ -23,7 +23,9 @@ open class MoviesListViewModel(application: Application) : AndroidViewModel(appl
     val movies: MutableLiveData<List<MovieEntity>> = MutableLiveData()
 
     internal open fun getRepository(): PopularMoviesRepository {
-        return PopularMoviesRepositoryImpl(getApplication())
+        return PopularMoviesRepositoryImpl(
+            getApplication()
+        )
     }
 
     fun loadMovies() {

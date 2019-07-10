@@ -1,4 +1,4 @@
-package com.digian.clean.features.movies
+package com.digian.clean.features.movies.presentation
 
 
 import android.net.Uri
@@ -76,7 +76,10 @@ class MovieDetailFragment : Fragment() {
 
                         if (genres.isNotEmpty()) {
                             movie_genres.visibility = View.VISIBLE
-                            movie_genres.text = createGenreText(genres)
+                            movie_genres.text =
+                                createGenreText(
+                                    genres
+                                )
                         }
                     }
                     movie_title.text = movieDetail.title

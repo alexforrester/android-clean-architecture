@@ -1,11 +1,12 @@
-package com.digian.clean.features.movies.data
+package com.digian.clean.features.movies.data.repository
 
 import android.content.Context
 import com.digian.clean.core.domain.UseCaseResult
 import com.digian.clean.core.domain.exception.Failure
-import com.digian.clean.features.movies.data.entities.MovieData
+import com.digian.clean.core.data.MoshiFactory
+import com.digian.clean.features.movies.data.MovieData
 import com.digian.clean.features.movies.data.mappers.MovieDataEntityMapper
-import com.digian.clean.features.movies.domain.PopularMoviesRepository
+import com.digian.clean.features.movies.domain.repository.PopularMoviesRepository
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonDataException
@@ -14,15 +15,6 @@ import com.squareup.moshi.Types
 import java.io.IOException
 import java.io.InputStream
 
-
-internal object MoshiFactory {
-
-    private val moshi: Moshi = Moshi.Builder()
-        .add(GenreAdapter())
-        .build()
-
-    fun getInstance() = moshi
-}
 
 internal open class PopularMoviesRepositoryImpl(
     private val context: Context,

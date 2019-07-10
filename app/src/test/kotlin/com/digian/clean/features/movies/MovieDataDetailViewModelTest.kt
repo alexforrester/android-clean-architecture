@@ -4,9 +4,12 @@ import androidx.lifecycle.Observer
 import com.digian.clean.InstantExecutorExtension
 import com.digian.clean.MoviesLifeCycleOwner
 import com.digian.clean.features.movies.data.*
-import com.digian.clean.features.movies.domain.PopularMoviesRepository
+import com.digian.clean.features.movies.data.repository.PopularMoviesRepositoryImpl
+import com.digian.clean.features.movies.domain.repository.PopularMoviesRepository
 import com.digian.clean.features.movies.domain.entities.GenreEntity
 import com.digian.clean.features.movies.domain.entities.MovieEntity
+import com.digian.clean.features.movies.presentation.MovieDetailViewModel
+import com.digian.clean.features.movies.presentation.UNKNOWN_MOVIE_ID
 import io.mockk.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

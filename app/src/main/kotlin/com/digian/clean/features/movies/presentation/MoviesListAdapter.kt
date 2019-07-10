@@ -1,4 +1,4 @@
-package com.digian.clean.features.movies
+package com.digian.clean.features.movies.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -29,7 +29,9 @@ internal class MoviesListAdapter(private val onItemClickListener: OnItemClickLis
         val textView = LayoutInflater.from(parent.context)
             .inflate(R.layout.movies_list_item, parent, false) as TextView
 
-        return MovieViewHolder(textView)
+        return MovieViewHolder(
+            textView
+        )
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {

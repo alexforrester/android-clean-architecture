@@ -1,7 +1,7 @@
 package com.digian.clean.features.movies.data.mappers
 
 import com.digian.clean.core.domain.Mapper
-import com.digian.clean.features.movies.data.entities.MovieData
+import com.digian.clean.features.movies.data.MovieData
 import com.digian.clean.features.movies.domain.entities.GenreEntity
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 

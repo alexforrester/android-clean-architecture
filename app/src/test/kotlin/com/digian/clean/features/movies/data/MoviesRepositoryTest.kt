@@ -1,7 +1,8 @@
 package com.digian.clean.features.movies.data
 
 import com.digian.clean.InstantExecutorExtension
-import com.digian.clean.features.movies.domain.PopularMoviesRepository
+import com.digian.clean.features.movies.data.repository.PopularMoviesRepositoryImpl
+import com.digian.clean.features.movies.domain.repository.PopularMoviesRepository
 import com.digian.clean.features.movies.domain.entities.GenreEntity
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import io.mockk.mockk

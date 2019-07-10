@@ -1,4 +1,4 @@
-package com.digian.clean.features.movies
+package com.digian.clean.features.movies.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

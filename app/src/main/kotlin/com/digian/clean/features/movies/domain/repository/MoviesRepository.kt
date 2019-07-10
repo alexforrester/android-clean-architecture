@@ -1,4 +1,4 @@
-package com.digian.clean.features.movies.domain
+package com.digian.clean.features.movies.domain.repository
 
 import com.digian.clean.core.domain.UseCaseResult
 import com.digian.clean.core.domain.exception.Failure

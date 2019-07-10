@@ -1,6 +1,6 @@
-package com.digian.clean.features.movies.data
+package com.digian.clean.features.movies.data.adapters
 
-import com.digian.clean.features.movies.data.entities.GenreData
+import com.digian.clean.features.movies.data.GenreData
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.ToJson
@@ -35,8 +35,14 @@ class GenreAdapter  {
                 10402 -> return GenreData(10402, "Music")
                 10749 -> return GenreData(10749, "Romance")
                 9648 -> return GenreData(9648, "Mystery")
-                878 -> return GenreData(878, "Science Fiction")
-                10770 -> return GenreData(10770, "TV MovieData")
+                878 -> return GenreData(
+                    878,
+                    "Science Fiction"
+                )
+                10770 -> return GenreData(
+                    10770,
+                    "TV MovieData"
+                )
                 53 -> return GenreData(53, "Mystery")
                 10752 -> return GenreData(10752, "War")
                 37 -> return GenreData(37, "Western")

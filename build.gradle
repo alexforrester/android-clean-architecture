@@ -4,7 +4,6 @@ buildscript {
     ext.moshi_version = '1.8.0'
     ext.androidx_espresso_version = "3.3.0-alpha01"
 
-
     repositories {
         google()
         jcenter()

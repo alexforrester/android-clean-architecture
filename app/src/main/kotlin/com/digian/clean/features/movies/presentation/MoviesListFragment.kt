@@ -1,4 +1,4 @@
-package com.digian.clean.features.movies
+package com.digian.clean.features.movies.presentation
 
 
 import android.os.Bundle
@@ -40,9 +40,13 @@ class MoviesListFragment : Fragment() {
 
         moviesListViewModel = ViewModelProviders.of(this).get(MoviesListViewModel::class.java)
         moviesViewManager = LinearLayoutManager(this.context)
-        moviesListAdapter = MoviesListAdapter(object : OnItemClickListener {
+        moviesListAdapter = MoviesListAdapter(object :
+            OnItemClickListener {
             override fun onItemClick(movieEntity: MovieEntity) {
-                val action = MoviesListFragmentDirections.actionMoviesFragmentToMovieDetailFragment(movieEntity.id)
+                val action =
+                    MoviesListFragmentDirections.actionMoviesFragmentToMovieDetailFragment(
+                        movieEntity.id
+                    )
                 findNavController().navigate(action)
             }
         })

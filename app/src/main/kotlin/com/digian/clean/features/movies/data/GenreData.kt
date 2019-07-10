@@ -1,4 +1,4 @@
-package com.digian.clean.features.movies.data.entities
+package com.digian.clean.features.movies.data
 
 /**
  * Created by Alex Forrester on 2019-04-26.

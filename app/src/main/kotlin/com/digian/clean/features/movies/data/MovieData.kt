@@ -1,4 +1,4 @@
-package com.digian.clean.features.movies.data.entities
+package com.digian.clean.features.movies.data
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
