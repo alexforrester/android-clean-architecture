@@ -4,6 +4,7 @@ import android.content.Context
 import com.digian.clean.core.domain.UseCaseResult
 import com.digian.clean.core.domain.exception.Failure
 import com.digian.clean.core.data.MoshiFactory
+import com.digian.clean.core.domain.exception.ERROR_MESSAGE_UNAVAILABLE
 import com.digian.clean.features.movies.data.MovieData
 import com.digian.clean.features.movies.data.mappers.MovieDataEntityMapper
 import com.digian.clean.features.movies.domain.repository.PopularMoviesRepository
@@ -39,9 +40,9 @@ internal open class PopularMoviesRepositoryImpl(
             UseCaseResult.Success(moviesEntity)
 
         } catch (jsonDataException: JsonDataException) {
-            UseCaseResult.Error(Failure.ParsingError)
-        } catch (exception: Throwable) {
-            UseCaseResult.Error(Failure.ServerError)
+            UseCaseResult.Error(Failure.ParsingError(jsonDataException))
+        } catch (exception: Exception) {
+            UseCaseResult.Error(Failure.ServerError(exception))
         }
 
     }

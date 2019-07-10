@@ -4,6 +4,7 @@ import com.digian.clean.core.domain.exception.Failure
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
+import java.lang.Exception
 
 internal class UseCaseResultTest {
 
@@ -20,10 +21,11 @@ internal class UseCaseResultTest {
 
     @Test
     fun `UseCaseResult Error should return correct type`() {
-        val result = UseCaseResult.Error(Failure.NetworkConnection)
+        val result = UseCaseResult.Error(Failure.NetworkConnection(Exception("some message")))
 
         result.successOrError({
-            assertEquals(Failure.NetworkConnection, it)
+            assertTrue(it is Failure.NetworkConnection)
+            assertEquals("some message", it.exception.message)
         }, {
             fail()
         })
