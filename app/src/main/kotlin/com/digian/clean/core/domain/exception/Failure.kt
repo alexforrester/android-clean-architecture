@@ -10,6 +10,7 @@ package com.digian.clean.core.domain.exception
  *
  */
 sealed class Failure {
+    //TODO - Add to networking client for retrieval
     object NetworkConnection : Failure()
     object ServerError : Failure()
     object ParsingError : Failure()

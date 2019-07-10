@@ -14,7 +14,6 @@ import com.digian.clean.features.movies.domain.usecases.GetMoviesUseCase
 
 /**
  * Created by Alex Forrester on 23/04/20
- * 19.
  */
 open class MoviesListViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -35,6 +34,7 @@ open class MoviesListViewModel(application: Application) : AndroidViewModel(appl
     private fun handleFailure(failure: Failure) {
         //TODO Add Error handling
         Log.d(this.javaClass.name, failure.toString())
+        this.failure.value = failure
 
     }
 
