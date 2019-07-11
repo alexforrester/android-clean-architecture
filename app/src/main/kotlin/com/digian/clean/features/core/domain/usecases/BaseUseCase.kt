@@ -1,6 +1,7 @@
 package com.digian.clean.features.core.domain.usecases
 
 import com.digian.clean.features.core.domain.UseCaseResult
+import com.digian.clean.features.core.data.exception.Failures
 import com.digian.clean.features.core.domain.exception.Failure
 
 /**

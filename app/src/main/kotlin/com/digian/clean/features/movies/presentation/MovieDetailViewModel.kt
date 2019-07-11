@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.digian.clean.features.core.domain.exception.Failure
+import com.digian.clean.features.core.data.exception.Failures
 import com.digian.clean.features.core.domain.usecases.BaseUseCase
 import com.digian.clean.features.movies.data.repository.PopularMoviesRepositoryImpl
 import com.digian.clean.features.movies.domain.repository.PopularMoviesRepository
@@ -36,7 +36,7 @@ open class MovieDetailViewModel(application: Application) : AndroidViewModel(app
         )
     }
 
-    private fun handleFailure(failure: Failure) {
+    private fun handleFailure(failures: Failures) {
 
     }
 

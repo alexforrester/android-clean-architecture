@@ -65,9 +65,9 @@ class MoviesListFragment : Fragment() {
                 moviesListAdapter.data = popularMovies
             })
 
-        moviesListViewModel.failure.observe(this,
+        moviesListViewModel.failures.observe(this,
             Observer { failure ->
-            Toast.makeText(activity, "failure is $failure", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, "failures is $failure", Toast.LENGTH_LONG).show()
         })
 
         moviesListViewModel.loadMovies()

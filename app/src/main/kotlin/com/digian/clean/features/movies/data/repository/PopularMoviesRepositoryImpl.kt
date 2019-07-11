@@ -3,7 +3,7 @@ package com.digian.clean.features.movies.data.repository
 import android.content.Context
 import com.digian.clean.features.core.data.MoshiFactory
 import com.digian.clean.features.core.domain.UseCaseResult
-import com.digian.clean.features.core.domain.exception.Failure
+import com.digian.clean.features.core.data.exception.Failures
 import com.digian.clean.features.movies.data.MovieData
 import com.digian.clean.features.movies.data.mappers.MovieDataEntityMapper
 import com.digian.clean.features.movies.domain.entities.MovieEntity
@@ -20,7 +20,7 @@ internal open class PopularMoviesRepositoryImpl(
     private val moshi: Moshi = MoshiFactory.getInstance()
 ) : PopularMoviesRepository {
 
-    override fun getMovies(): UseCaseResult<Failure, List<MovieEntity>> {
+    override fun getMovies(): UseCaseResult<Failures, List<MovieEntity>> {
 
         return try {
 
@@ -38,9 +38,9 @@ internal open class PopularMoviesRepositoryImpl(
             UseCaseResult.Success(moviesEntity)
 
         } catch (jsonDataException: JsonDataException) {
-            UseCaseResult.Error(Failure.ParsingError(jsonDataException))
+            UseCaseResult.Error(Failures.ParsingError(jsonDataException))
         } catch (exception: Exception) {
-            UseCaseResult.Error(Failure.ServerError(exception))
+            UseCaseResult.Error(Failures.ServerError(exception))
         }
 
     }
