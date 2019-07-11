@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.digian.clean.features.core.data.exception.Failures
+import com.digian.clean.features.core.domain.exception.Failure
 import com.digian.clean.features.core.domain.usecases.BaseUseCase
 import com.digian.clean.features.movies.data.repository.PopularMoviesRepositoryImpl
 import com.digian.clean.features.movies.domain.repository.PopularMoviesRepository
@@ -18,7 +19,7 @@ import com.digian.clean.features.movies.domain.usecases.GetMoviesUseCase
 open class MoviesListViewModel(application: Application) : AndroidViewModel(application) {
 
     private val getMoviesUseCase: GetMoviesUseCase = GetMoviesUseCase(getRepository())
-    val failures: MutableLiveData<Failures> = MutableLiveData()
+    val failures: MutableLiveData<Failure> = MutableLiveData()
     val movies: MutableLiveData<List<MovieEntity>> = MutableLiveData()
 
     internal open fun getRepository(): PopularMoviesRepository {
@@ -31,10 +32,10 @@ open class MoviesListViewModel(application: Application) : AndroidViewModel(appl
         getMoviesUseCase(BaseUseCase.None()).successOrError(::handleFailure, ::handleSuccess)
     }
 
-    private fun handleFailure(failures: Failures) {
+    private fun handleFailure(failure: Failure) {
         //TODO Add Error handling
         Log.d(this.javaClass.name, failures.toString())
-        this.failures.value = failures
+        this.failures.value = failure
 
     }
 

@@ -1,8 +1,9 @@
-package com.digian.clean.features.core.domain
+package com.digian.clean.features.core.data
 
 import com.digian.clean.features.core.data.exception.Failures
 import com.digian.clean.features.core.data.exception.NETWORK_UNAVAILABLE
 import com.digian.clean.features.core.data.exception.NetworkConnectionException
+import com.digian.clean.features.core.domain.UseCaseResult
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -24,10 +25,11 @@ internal class UseCaseResultTest {
     fun `UseCaseResult Error should return correct type`() {
         val result = UseCaseResult.Error(
             Failures.NetworkConnection(
-            NetworkConnectionException(
-                NETWORK_UNAVAILABLE
+                NetworkConnectionException(
+                    NETWORK_UNAVAILABLE
+                )
             )
-        ))
+        )
 
         result.successOrError({
             assertTrue(it is Failures.NetworkConnection)

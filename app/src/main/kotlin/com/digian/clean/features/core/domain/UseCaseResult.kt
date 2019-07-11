@@ -1,6 +1,5 @@
 package com.digian.clean.features.core.domain
 
-import com.digian.clean.features.core.data.exception.Failures
 import com.digian.clean.features.core.domain.exception.Failure
 
 
