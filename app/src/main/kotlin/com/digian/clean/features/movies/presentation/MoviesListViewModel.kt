@@ -4,8 +4,8 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.digian.clean.core.domain.exception.Failure
-import com.digian.clean.core.domain.usecases.BaseUseCase
+import com.digian.clean.features.core.domain.exception.Failure
+import com.digian.clean.features.core.domain.usecases.BaseUseCase
 import com.digian.clean.features.movies.data.repository.PopularMoviesRepositoryImpl
 import com.digian.clean.features.movies.domain.repository.PopularMoviesRepository
 import com.digian.clean.features.movies.domain.entities.MovieEntity
@@ -39,11 +39,11 @@ open class MoviesListViewModel(application: Application) : AndroidViewModel(appl
     }
 
     private fun handleSuccess(movies: List<MovieEntity>) {
-        movies.sortedByDescending {
+        val sortedMovies = movies.sortedByDescending {
             it.voteCount
         }
 
-        this.movies.value = movies
+        this.movies.value = sortedMovies
     }
 
 

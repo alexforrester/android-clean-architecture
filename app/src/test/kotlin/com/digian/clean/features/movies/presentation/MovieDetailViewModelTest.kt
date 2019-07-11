@@ -1,4 +1,4 @@
-package com.digian.clean.features.movies
+package com.digian.clean.features.movies.presentation
 
 import androidx.lifecycle.Observer
 import com.digian.clean.InstantExecutorExtension
@@ -20,7 +20,7 @@ import java.io.InputStream
  * Created by Alex Forrester on 2019-04-24.
  */
 @ExtendWith(InstantExecutorExtension::class)
-internal class MovieDataDetailViewModelTest {
+internal class MovieDetailViewModelTest {
 
     private val moviesDetailViewModel: MovieDetailViewModel = object : MovieDetailViewModel(mockk()) {
 

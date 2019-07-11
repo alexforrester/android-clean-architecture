@@ -1,4 +1,4 @@
-package com.digian.clean.core.domain.exception
+package com.digian.clean.features.core.domain.exception
 
 import com.squareup.moshi.JsonDataException
 import java.lang.Exception
@@ -14,7 +14,7 @@ import java.lang.Exception
  */
 sealed class Failure(val exception: Exception) {
     //TODO - Add to networking client for retrieval
-    class NetworkConnection(exception : Exception) : Failure(exception)
+    class NetworkConnection(networkConnectionException: NetworkConnectionException) : Failure(networkConnectionException)
     class ServerError(exception : Exception) : Failure(exception)
     class ParsingError(jsonDataException : JsonDataException) : Failure(jsonDataException)
 

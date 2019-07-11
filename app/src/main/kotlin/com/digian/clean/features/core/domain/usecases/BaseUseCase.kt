@@ -1,10 +1,12 @@
-package com.digian.clean.core.domain.usecases
+package com.digian.clean.features.core.domain.usecases
 
-import com.digian.clean.core.domain.UseCaseResult
-import com.digian.clean.core.domain.exception.Failure
+import com.digian.clean.features.core.domain.UseCaseResult
+import com.digian.clean.features.core.domain.exception.Failure
 
 /**
- * Simplifies use case handling
+ * Created by Alex Forrester on 2019-05-15.
+ *
+ * use case handling
  */
 abstract class BaseUseCase<in Params, out Type> where Type : Any {
 

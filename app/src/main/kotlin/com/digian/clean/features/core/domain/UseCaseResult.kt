@@ -1,6 +1,6 @@
-package com.digian.clean.core.domain
+package com.digian.clean.features.core.domain
 
-import com.digian.clean.core.domain.exception.Failure
+import com.digian.clean.features.core.domain.exception.Failure
 
 
 /**
@@ -13,7 +13,7 @@ import com.digian.clean.core.domain.exception.Failure
  * @see <a href="https://github.com/android10/Android-CleanArchitecture-Kotlin/blob/master/app/src/main/kotlin/com/fernandocejas/sample/core/functional/Either.kt">'Either' class and convention for use</a>
  *
  **/
-sealed class UseCaseResult<out FailureType : Failure, out Type> {
+sealed class UseCaseResult<out FailureType: Failure, out Type> {
 
     /** Represents modified left side of [Either] type class which by convention is a "Failure". */
     class Error<out FailureType : Failure>(val failure: FailureType) : UseCaseResult<FailureType, Nothing>()

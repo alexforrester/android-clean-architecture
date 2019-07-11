@@ -1,4 +1,4 @@
-package com.digian.clean.features.movies
+package com.digian.clean.features.movies.presentation
 
 import com.digian.clean.features.movies.domain.entities.GenreEntity
 import com.digian.clean.features.movies.presentation.MovieDetailFragment
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 /**
  * Created by Alex Forrester on 2019-04-28.
  */
-internal class MovieDataDetailFragmentCompanionTest {
+internal class MovieDetailFragmentCompanionTest {
 
     private val genres = listOf(
         GenreEntity(28, "Action"),

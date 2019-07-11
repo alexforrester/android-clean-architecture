@@ -1,4 +1,4 @@
-package com.digian.clean.features.movies
+package com.digian.clean.features.movies.presentation
 
 import androidx.lifecycle.Observer
 import com.digian.clean.InstantExecutorExtension
@@ -22,7 +22,7 @@ internal class MoviesListViewModelTest {
 
     private val moviesListViewModel: MoviesListViewModel = object : MoviesListViewModel(mockk()) {
 
-        override fun getRepository() : PopularMoviesRepository = object :
+        override fun getRepository(): PopularMoviesRepository = object :
             PopularMoviesRepositoryImpl(mockk()) {
 
             override fun getInputStreamForJsonFile(fileName: String): InputStream {
@@ -40,9 +40,25 @@ internal class MoviesListViewModelTest {
         moviesListViewModel.movies.observe(MoviesLifeCycleOwner(), observer)
         moviesListViewModel.loadMovies()
 
+
         verify { observer.onChanged(any()) }
         verify {
-            observer.onChanged(match { it.size == 20 })
+            observer.onChanged(match {
+                it.size == 20
+            }
+            )
+        }
+        verify {
+            observer.onChanged(match {
+                it[0].title == "The Dark Knight"
+            }
+            )
+        }
+        verify {
+            observer.onChanged(match {
+                it[0].voteCount == 18378
+            }
+            )
         }
 
         confirmVerified(observer)
