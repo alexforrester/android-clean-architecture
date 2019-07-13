@@ -3,11 +3,9 @@ package com.digian.clean.features.movies.data.mappers
 import com.digian.clean.features.movies.data.GenreData
 import com.digian.clean.features.movies.data.MovieData
 import com.digian.clean.features.movies.domain.entities.GenreEntity
-import com.digian.clean.features.movies.domain.entities.MovieEntity
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 
 /**
  * Created by Alex Forrester on 2019-07-11.

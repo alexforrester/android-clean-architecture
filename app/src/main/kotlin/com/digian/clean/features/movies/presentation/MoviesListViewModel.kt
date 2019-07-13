@@ -1,32 +1,20 @@
 package com.digian.clean.features.movies.presentation
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.digian.clean.features.core.data.platform.NetworkHandler
+import androidx.lifecycle.ViewModel
 import com.digian.clean.features.core.domain.exception.Failure
 import com.digian.clean.features.core.domain.ports.UseCaseInput
-import com.digian.clean.features.movies.data.repository.MoviesRepositoryImpl
 import com.digian.clean.features.movies.domain.entities.MovieEntity
-import com.digian.clean.features.movies.domain.repository.MoviesRepository
 import com.digian.clean.features.movies.domain.usecases.GetMoviesUseCase
 import timber.log.Timber
 
 /**
  * Created by Alex Forrester on 23/04/20
  */
-open class MoviesListViewModel(application: Application) : AndroidViewModel(application) {
+open class MoviesListViewModel(val getMoviesUseCase: GetMoviesUseCase) : ViewModel() {
 
-    private val getMoviesUseCase: GetMoviesUseCase = GetMoviesUseCase(getRepository())
     val failure: MutableLiveData<Failure> = MutableLiveData()
     val movies: MutableLiveData<List<MovieEntity>> = MutableLiveData()
-
-    internal open fun getRepository(): MoviesRepository {
-        return MoviesRepositoryImpl(
-            getApplication(),
-            networkHandler = NetworkHandler(getApplication())
-        )
-    }
 
     fun loadMovies() {
         getMoviesUseCase(UseCaseInput.None).successOrError(::handleFailure, ::handleSuccess)
@@ -45,6 +33,4 @@ open class MoviesListViewModel(application: Application) : AndroidViewModel(appl
 
         this.movies.value = sortedMovies
     }
-
-
 }

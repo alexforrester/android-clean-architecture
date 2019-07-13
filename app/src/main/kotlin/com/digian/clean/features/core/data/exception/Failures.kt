@@ -2,7 +2,6 @@ package com.digian.clean.features.core.data.exception
 
 import com.digian.clean.features.core.domain.exception.Failure
 import com.squareup.moshi.JsonDataException
-import java.lang.Exception
 
 
 /**

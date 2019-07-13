@@ -4,9 +4,8 @@ import android.content.Context
 import android.net.NetworkInfo
 import io.mockk.every
 import io.mockk.mockk
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 
 /**
  * Created by Alex Forrester on 2019-06-06.

@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +17,7 @@ import com.digian.clean.R
 import com.digian.clean.features.core.data.exception.Failures
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import kotlinx.android.synthetic.main.fragment_movies.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by Alex Forrester on 24/04/2019.
@@ -28,9 +28,7 @@ class MoviesListFragment : Fragment() {
     private lateinit var moviesListAdapter: MoviesListAdapter
     private lateinit var moviesViewManager: RecyclerView.LayoutManager
 
-    private val moviesListViewModel: MoviesListViewModel by lazy {
-        ViewModelProviders.of(this).get(MoviesListViewModel::class.java)
-    }
+    val moviesListViewModel : MoviesListViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

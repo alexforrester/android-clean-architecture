@@ -1,10 +1,15 @@
 package com.digian.clean
 
 import com.digian.clean.features.core.data.platform.NetworkHandler
-import com.digian.clean.features.movies.data.api.API_KEY
+import com.digian.clean.features.movies.data.adapters.GenreAdapter
 import com.digian.clean.features.movies.data.api.MoviesAPI
+import com.digian.clean.features.movies.data.repository.MoviesRepositoryImpl
+import com.digian.clean.features.movies.domain.repository.MoviesRepository
+import com.digian.clean.features.movies.domain.usecases.GetMovieDetailUseCase
+import com.digian.clean.features.movies.domain.usecases.GetMoviesUseCase
 import com.digian.clean.features.movies.presentation.MovieDetailViewModel
 import com.digian.clean.features.movies.presentation.MoviesListViewModel
+import com.squareup.moshi.Moshi
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -16,23 +21,34 @@ const val THE_MOVIE_DATABASE = "https://api.themoviedb.org/3/"
 val appModules = module {
 
     single {
-        createWebService<MoviesAPI>(API_KEY)
+        createWebService<MoviesAPI>(THE_MOVIE_DATABASE)
     }
-//    single {
-//        MoviesRepository(get(),get(), androidContext().applicationContext.getString(R.string.language))
-//    }
+
+    single {
+        MoviesRepositoryImpl(androidContext(), get(), get()) as MoviesRepository
+    }
+
+    single {
+        Moshi.Builder()
+            .add(GenreAdapter())
+            .build()
+    }
+
     single {
         NetworkHandler(androidContext())
     }
 
-    //factory { WordLookUpUseCase(get()) }
+    factory { GetMovieDetailUseCase(get()) }
+    factory { GetMoviesUseCase(get()) }
 
     viewModel { MoviesListViewModel(get()) }
     viewModel { MovieDetailViewModel(get()) }
+
+
 }
 
 /* function to build our Retrofit service */
-inline fun <reified T> createWebService( baseUrl: String): T {
+inline fun <reified T> createWebService(baseUrl: String): T {
 
     val retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)

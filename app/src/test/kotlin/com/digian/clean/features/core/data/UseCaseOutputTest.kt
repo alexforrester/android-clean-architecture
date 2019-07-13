@@ -4,9 +4,9 @@ import com.digian.clean.features.core.data.exception.Failures
 import com.digian.clean.features.core.data.exception.NETWORK_UNAVAILABLE
 import com.digian.clean.features.core.data.exception.NetworkConnectionException
 import com.digian.clean.features.core.domain.ports.UseCaseOutput
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 
 internal class UseCaseOutputTest {
 
@@ -32,7 +32,6 @@ internal class UseCaseOutputTest {
         )
 
         result.successOrError({
-            assertTrue(it is Failures.NetworkUnavailable)
             assertEquals(NETWORK_UNAVAILABLE, it.exception.message)
         }, {
             fail()

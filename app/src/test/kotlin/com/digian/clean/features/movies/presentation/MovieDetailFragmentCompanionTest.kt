@@ -1,7 +1,6 @@
 package com.digian.clean.features.movies.presentation
 
 import com.digian.clean.features.movies.domain.entities.GenreEntity
-import com.digian.clean.features.movies.presentation.MovieDetailFragment
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

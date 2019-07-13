@@ -9,12 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.digian.clean.R
 import com.digian.clean.features.core.data.exception.Failures
 import com.digian.clean.features.movies.domain.entities.GenreEntity
@@ -22,6 +20,7 @@ import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 const val UNKNOWN_MOVIE_ID = 0
 const val IMAGE_URL_AND_PATH = "https://image.tmdb.org/t/p/w400"
@@ -52,9 +51,7 @@ class MovieDetailFragment : Fragment() {
         }
     }
 
-    private val movieDetailViewModel: MovieDetailViewModel by lazy {
-        ViewModelProviders.of(this).get(MovieDetailViewModel::class.java)
-    }
+    private val movieDetailViewModel : MovieDetailViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,7 +67,7 @@ class MovieDetailFragment : Fragment() {
         val movieId: Int = arguments?.getInt("movieId") ?: UNKNOWN_MOVIE_ID
 
         //Loads movie detail and returns from observer or displays error view
-        movieDetailViewModel.getMovie(movieId).observe(this,
+        movieDetailViewModel.movie.observe(this,
             Observer<MovieEntity> { movie ->
 
                 movie?.let { movieDetail ->
@@ -99,7 +96,7 @@ class MovieDetailFragment : Fragment() {
                 addErrorView(failure as? Failures)
             })
 
-        movieDetailViewModel.loadMovie()
+        movieDetailViewModel.loadMovie(movieId)
     }
 
     private fun addErrorView(failureException: Failures?) {

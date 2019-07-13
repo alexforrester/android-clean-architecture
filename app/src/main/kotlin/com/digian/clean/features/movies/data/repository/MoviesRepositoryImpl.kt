@@ -1,14 +1,13 @@
 package com.digian.clean.features.movies.data.repository
 
 import android.content.Context
-import com.digian.clean.features.core.data.MoshiFactory
-import com.digian.clean.features.core.domain.ports.UseCaseOutput
 import com.digian.clean.features.core.data.exception.Failures
 import com.digian.clean.features.core.data.exception.NETWORK_UNAVAILABLE
 import com.digian.clean.features.core.data.exception.NetworkConnectionException
 import com.digian.clean.features.core.data.platform.NetworkHandler
 import com.digian.clean.features.core.domain.exception.Failure
 import com.digian.clean.features.core.domain.ports.UseCaseInput
+import com.digian.clean.features.core.domain.ports.UseCaseOutput
 import com.digian.clean.features.movies.data.MovieData
 import com.digian.clean.features.movies.data.exception.MovieCollectionException
 import com.digian.clean.features.movies.data.mappers.MovieDataEntityMapper
@@ -21,9 +20,9 @@ import com.squareup.moshi.Types
 import java.io.IOException
 import java.io.InputStream
 
-internal open class MoviesRepositoryImpl(
+open class MoviesRepositoryImpl(
     private val context: Context,
-    private val moshi: Moshi = MoshiFactory.getInstance(),
+    private val moshi: Moshi,
     private val networkHandler: NetworkHandler
 ) : MoviesRepository {
 

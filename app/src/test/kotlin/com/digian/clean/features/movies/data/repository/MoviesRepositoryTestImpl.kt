@@ -1,12 +1,13 @@
 package com.digian.clean.features.movies.data.repository
 
 import com.digian.clean.InstantExecutorExtension
+import com.digian.clean.MoshiFactory
 import com.digian.clean.features.core.data.exception.Failures
 import com.digian.clean.features.core.data.platform.NetworkHandler
 import com.digian.clean.features.core.domain.ports.UseCaseInput
-import com.digian.clean.features.movies.domain.repository.MoviesRepository
 import com.digian.clean.features.movies.domain.entities.GenreEntity
 import com.digian.clean.features.movies.domain.entities.MovieEntity
+import com.digian.clean.features.movies.domain.repository.MoviesRepository
 import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.*
@@ -27,6 +28,7 @@ internal class MoviesRepositoryTest {
 
     private val networkHandlerConnected: NetworkHandler = mockk()
     private val networkHandlerNotConnected: NetworkHandler = mockk()
+    private val moshi = MoshiFactory.moshi
 
     init {
         every { networkHandlerConnected.isConnected } returns true
@@ -34,7 +36,7 @@ internal class MoviesRepositoryTest {
     }
 
     private val moviesRepository: MoviesRepository = object :
-        MoviesRepositoryImpl(mockk(), networkHandler = networkHandlerConnected) {
+        MoviesRepositoryImpl(mockk(), moshi, networkHandler = networkHandlerConnected) {
 
         override fun getInputStreamForJsonFile(fileName: String): InputStream {
             return FileInputStream(ASSET_BASE_PATH + fileName)
@@ -42,7 +44,7 @@ internal class MoviesRepositoryTest {
     }
 
     private val moviesRepositoryNoNetwork: MoviesRepository = object :
-        MoviesRepositoryImpl(mockk(), networkHandler = networkHandlerNotConnected) {
+        MoviesRepositoryImpl(mockk(), moshi, networkHandler = networkHandlerNotConnected) {
 
         override fun getInputStreamForJsonFile(fileName: String): InputStream {
             return FileInputStream(ASSET_BASE_PATH + fileName)

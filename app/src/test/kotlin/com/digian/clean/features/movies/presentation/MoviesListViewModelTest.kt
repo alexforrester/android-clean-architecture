@@ -2,21 +2,18 @@ package com.digian.clean.features.movies.presentation
 
 import androidx.lifecycle.Observer
 import com.digian.clean.InstantExecutorExtension
+import com.digian.clean.MovieRepositoryFactory
 import com.digian.clean.MoviesLifeCycleOwner
 import com.digian.clean.features.core.data.exception.Failures
-import com.digian.clean.features.core.data.platform.NetworkHandler
 import com.digian.clean.features.core.domain.exception.Failure
 import com.digian.clean.features.core.domain.ports.UseCaseInput
 import com.digian.clean.features.core.domain.ports.UseCaseOutput
-import com.digian.clean.features.movies.data.repository.ASSET_BASE_PATH
-import com.digian.clean.features.movies.data.repository.MoviesRepositoryImpl
-import com.digian.clean.features.movies.domain.repository.MoviesRepository
 import com.digian.clean.features.movies.domain.entities.MovieEntity
+import com.digian.clean.features.movies.domain.repository.MoviesRepository
+import com.digian.clean.features.movies.domain.usecases.GetMoviesUseCase
 import io.mockk.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import java.io.FileInputStream
-import java.io.InputStream
 
 /**
  * Created by Alex Forrester on 2019-04-24.
@@ -24,38 +21,13 @@ import java.io.InputStream
 @ExtendWith(InstantExecutorExtension::class)
 internal class MoviesListViewModelTest {
 
-    private val networkHandlerConnected: NetworkHandler = mockk()
+    private val moviesListViewModel: MoviesListViewModel = MoviesListViewModel(
+        GetMoviesUseCase(MovieRepositoryFactory.movieRepository)
+    )
 
-    init {
-        every { networkHandlerConnected.isConnected } returns true
-    }
-
-    private val moviesListViewModel: MoviesListViewModel = object : MoviesListViewModel(mockk()) {
-
-        override fun getRepository(): MoviesRepository = object :
-            MoviesRepositoryImpl(mockk(), networkHandler = networkHandlerConnected) {
-
-            override fun getInputStreamForJsonFile(fileName: String): InputStream {
-                return FileInputStream(ASSET_BASE_PATH + fileName)
-            }
-        }
-    }
-
-    private val moviesListViewModelWithFailureRepoGetMovies: MoviesListViewModel =
-        object : MoviesListViewModel(mockk()) {
-
-            override fun getRepository(): MoviesRepository = object :
-                MoviesRepositoryImpl(mockk(), networkHandler = networkHandlerConnected) {
-
-                override fun getMovies(none: UseCaseInput.None): UseCaseOutput<Failure, List<MovieEntity>> {
-                    return UseCaseOutput.Error(Failures.ServerException(Exception()))
-                }
-
-                override fun getInputStreamForJsonFile(fileName: String): InputStream {
-                    return FileInputStream(ASSET_BASE_PATH + fileName)
-                }
-            }
-        }
+    private val moviesListViewModelWithFailureRepoGetMovies: MoviesListViewModel = MoviesListViewModel(
+        GetMoviesUseCase(MovieRepositoryFactory.movieRepositoryFailure)
+    )
 
     @Test
     fun `given getMovies call made, when a successful use case returns, then adding observer emits onChanged`() {
