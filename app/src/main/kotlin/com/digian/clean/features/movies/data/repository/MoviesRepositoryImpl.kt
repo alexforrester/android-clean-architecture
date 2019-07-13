@@ -20,6 +20,14 @@ import com.squareup.moshi.Types
 import java.io.IOException
 import java.io.InputStream
 
+/**
+ * Created by Alex Forrester on 23/04/2019.
+ *
+ * Gets movie data for list and detail display
+ *
+ * Currently only implemented as a flat JSON file with no datasources, caching and remote retrieval
+ *
+ */
 open class MoviesRepositoryImpl(
     private val context: Context,
     private val moshi: Moshi,

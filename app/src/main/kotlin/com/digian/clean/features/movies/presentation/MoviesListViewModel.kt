@@ -16,6 +16,7 @@ open class MoviesListViewModel(val getMoviesUseCase: GetMoviesUseCase) : ViewMod
     val failure: MutableLiveData<Failure> = MutableLiveData()
     val movies: MutableLiveData<List<MovieEntity>> = MutableLiveData()
 
+    //TODO("Add coroutines to run off main thread")
     fun loadMovies() {
         getMoviesUseCase(UseCaseInput.None).successOrError(::handleFailure, ::handleSuccess)
     }
@@ -23,7 +24,6 @@ open class MoviesListViewModel(val getMoviesUseCase: GetMoviesUseCase) : ViewMod
     private fun handleFailure(failure: Failure) {
         Timber.d(this.failure.toString())
         this.failure.value = failure
-
     }
 
     private fun handleSuccess(movies: List<MovieEntity>) {

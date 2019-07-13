@@ -15,6 +15,7 @@ open class MovieDetailViewModel(val getMovieDetailUseCase: GetMovieDetailUseCase
     val failure: MutableLiveData<Failure> = MutableLiveData()
     val movie: MutableLiveData<MovieEntity> = MutableLiveData()
 
+    //TODO("Add coroutines to run off main thread")
     fun loadMovie(movieId : Int) {
         getMovieDetailUseCase(UseCaseInput.Single(movieId)).successOrError(::handleFailure, ::handleSuccess)
     }
