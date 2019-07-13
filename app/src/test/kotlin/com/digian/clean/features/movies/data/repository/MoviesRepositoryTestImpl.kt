@@ -1,13 +1,15 @@
-package com.digian.clean.features.movies.data
+package com.digian.clean.features.movies.data.repository
 
 import com.digian.clean.InstantExecutorExtension
-import com.digian.clean.features.movies.data.repository.PopularMoviesRepositoryImpl
-import com.digian.clean.features.movies.domain.repository.PopularMoviesRepository
+import com.digian.clean.features.core.data.exception.Failures
+import com.digian.clean.features.core.data.platform.NetworkHandler
+import com.digian.clean.features.core.domain.ports.UseCaseInput
+import com.digian.clean.features.movies.domain.repository.MoviesRepository
 import com.digian.clean.features.movies.domain.entities.GenreEntity
 import com.digian.clean.features.movies.domain.entities.MovieEntity
+import io.mockk.every
 import io.mockk.mockk
-import org.junit.jupiter.api.Assertions.assertAll
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.api.fail
@@ -23,8 +25,24 @@ const val ASSET_BASE_PATH = "../app/src/main/assets/"
 @ExtendWith(InstantExecutorExtension::class)
 internal class MoviesRepositoryTest {
 
-    private val popularMoviesRepository: PopularMoviesRepository = object :
-        PopularMoviesRepositoryImpl(mockk()) {
+    private val networkHandlerConnected: NetworkHandler = mockk()
+    private val networkHandlerNotConnected: NetworkHandler = mockk()
+
+    init {
+        every { networkHandlerConnected.isConnected } returns true
+        every { networkHandlerNotConnected.isConnected } returns false
+    }
+
+    private val moviesRepository: MoviesRepository = object :
+        MoviesRepositoryImpl(mockk(), networkHandler = networkHandlerConnected) {
+
+        override fun getInputStreamForJsonFile(fileName: String): InputStream {
+            return FileInputStream(ASSET_BASE_PATH + fileName)
+        }
+    }
+
+    private val moviesRepositoryNoNetwork: MoviesRepository = object :
+        MoviesRepositoryImpl(mockk(), networkHandler = networkHandlerNotConnected) {
 
         override fun getInputStreamForJsonFile(fileName: String): InputStream {
             return FileInputStream(ASSET_BASE_PATH + fileName)
@@ -32,16 +50,28 @@ internal class MoviesRepositoryTest {
     }
 
     @Test
-    internal fun `given live data movie list is called, when flat json file parsed, then movie list created`() {
+    internal fun `given live data movie list is called, when no network connection, then Network Unavailable message returned`() {
 
-        val popularMovies = popularMoviesRepository.getMovies()
+        val popularMovies = moviesRepositoryNoNetwork.getMovies(UseCaseInput.None)
 
         popularMovies.successOrError({
+            assertTrue(it is Failures.NetworkUnavailable)
 
-            fail("Movie list not returned")
         }, {
+            fail("Movie list returned")
+        }
+        )
+    }
 
-            assertEquals(20, it.size)
+    @Test
+    internal fun `given live data movie detail is called, when no network connection, then Network Unavailable message returned`() {
+
+        val popularMovies = moviesRepositoryNoNetwork.getMovieDetail(UseCaseInput.Single(278))
+
+        popularMovies.successOrError({
+            assertTrue(it is Failures.NetworkUnavailable)
+        }, {
+            fail("Movie returned")
         }
         )
     }
@@ -49,7 +79,7 @@ internal class MoviesRepositoryTest {
     @Test
     internal fun `given live data movie list is called, when flat json file parsed, then individual movie has correct state`() {
 
-        val popularMovies = popularMoviesRepository.getMovies()
+        val popularMovies = moviesRepository.getMovies(UseCaseInput.None)
 
         popularMovies.successOrError({
 

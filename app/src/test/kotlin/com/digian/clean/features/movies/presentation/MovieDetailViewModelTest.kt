@@ -3,13 +3,13 @@ package com.digian.clean.features.movies.presentation
 import androidx.lifecycle.Observer
 import com.digian.clean.InstantExecutorExtension
 import com.digian.clean.MoviesLifeCycleOwner
-import com.digian.clean.features.movies.data.*
-import com.digian.clean.features.movies.data.repository.PopularMoviesRepositoryImpl
-import com.digian.clean.features.movies.domain.repository.PopularMoviesRepository
+import com.digian.clean.features.core.data.platform.NetworkHandler
+import com.digian.clean.features.core.domain.exception.Failure
+import com.digian.clean.features.movies.data.repository.ASSET_BASE_PATH
+import com.digian.clean.features.movies.data.repository.MoviesRepositoryImpl
+import com.digian.clean.features.movies.domain.repository.MoviesRepository
 import com.digian.clean.features.movies.domain.entities.GenreEntity
 import com.digian.clean.features.movies.domain.entities.MovieEntity
-import com.digian.clean.features.movies.presentation.MovieDetailViewModel
-import com.digian.clean.features.movies.presentation.UNKNOWN_MOVIE_ID
 import io.mockk.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -22,10 +22,16 @@ import java.io.InputStream
 @ExtendWith(InstantExecutorExtension::class)
 internal class MovieDetailViewModelTest {
 
+    private val networkHandlerConnected: NetworkHandler = mockk()
+
+    init {
+        every { networkHandlerConnected.isConnected } returns true
+    }
+
     private val moviesDetailViewModel: MovieDetailViewModel = object : MovieDetailViewModel(mockk()) {
 
-        override fun getRepository() : PopularMoviesRepository = object :
-            PopularMoviesRepositoryImpl(mockk()) {
+        override fun getRepository() : MoviesRepository = object :
+            MoviesRepositoryImpl(mockk(), networkHandler = networkHandlerConnected) {
 
             override fun getInputStreamForJsonFile(fileName: String): InputStream {
                 return FileInputStream(ASSET_BASE_PATH + fileName)
@@ -64,14 +70,18 @@ internal class MovieDetailViewModelTest {
     fun `given invalid movie id, when used to retrieve movie, then movie state not set`() {
 
         val observer = mockk<Observer<MovieEntity>>()
-        every{ observer.onChanged(any()) } just Runs
+        val failureObserver = mockk<Observer<Failure>>()
+
+        every { observer.onChanged(any()) } just Runs
+        every { failureObserver.onChanged(any()) } just Runs
 
         //Verifying observer called when no movie found
         moviesDetailViewModel.getMovie(UNKNOWN_MOVIE_ID).observe(MoviesLifeCycleOwner(), observer)
+        moviesDetailViewModel.movieFailure.observe(MoviesLifeCycleOwner(), failureObserver)
         moviesDetailViewModel.loadMovie()
 
-        verify { observer.onChanged(any())}
-        verify { observer.onChanged(isNull())}
+        //failureObserver
+        verify { failureObserver.onChanged(any())}
 
         confirmVerified(observer)
     }

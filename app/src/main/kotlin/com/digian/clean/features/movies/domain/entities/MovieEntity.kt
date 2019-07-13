@@ -11,6 +11,7 @@ data class MovieEntity(
     val genres: List<GenreEntity>,
     val overview: String
 ) {
+    //Contract Overview to 150 characters max ending with a whole word followed by "..."
     val shortOverview: String
         get() = overview.substring(0, 150).replaceAfterLast(" ", "").trim().plus("...")
 }

@@ -6,7 +6,11 @@ import com.digian.clean.features.core.domain.ports.UseCaseOutput
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.digian.clean.features.movies.domain.repository.MoviesRepository
 
-open class GetMoviesUseCase(private val moviesRepository: MoviesRepository) {
+/**
+ * Created by Alex Forrester on 2019-07-12.
+ */
+class GetMovieDetailUseCase(private val moviesRepository: MoviesRepository) {
 
-    operator fun invoke(none: UseCaseInput.None): UseCaseOutput<Failure, List<MovieEntity>> = moviesRepository.getMovies(none)
+    operator fun invoke(movieIdInput: UseCaseInput.Single<Int>): UseCaseOutput<Failure, MovieEntity> = moviesRepository.getMovieDetail(movieIdInput)
+
 }

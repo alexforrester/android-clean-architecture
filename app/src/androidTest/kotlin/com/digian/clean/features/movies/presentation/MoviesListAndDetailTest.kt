@@ -1,4 +1,4 @@
-package com.digian.clean
+package com.digian.clean.features.movies.presentation
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
@@ -9,7 +9,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.digian.clean.features.movies.presentation.MoviesActivity
+import com.digian.clean.R
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
