@@ -52,7 +52,9 @@ class MovieDetailFragment : Fragment() {
         }
     }
 
-    private lateinit var movieDetailViewModel: MovieDetailViewModel
+    private val movieDetailViewModel: MovieDetailViewModel by lazy {
+        ViewModelProviders.of(this).get(MovieDetailViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,8 +66,6 @@ class MovieDetailFragment : Fragment() {
 
     override fun onActivityCreated(@Nullable savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        movieDetailViewModel = ViewModelProviders.of(this).get(MovieDetailViewModel::class.java)
 
         val movieId: Int = arguments?.getInt("movieId") ?: UNKNOWN_MOVIE_ID
 

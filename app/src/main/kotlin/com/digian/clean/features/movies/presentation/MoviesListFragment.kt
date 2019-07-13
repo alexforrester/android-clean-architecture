@@ -27,7 +27,10 @@ class MoviesListFragment : Fragment() {
     private lateinit var moviesRecyclerView: RecyclerView
     private lateinit var moviesListAdapter: MoviesListAdapter
     private lateinit var moviesViewManager: RecyclerView.LayoutManager
-    private lateinit var moviesListViewModel: MoviesListViewModel
+
+    private val moviesListViewModel: MoviesListViewModel by lazy {
+        ViewModelProviders.of(this).get(MoviesListViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +42,6 @@ class MoviesListFragment : Fragment() {
     override fun onActivityCreated(@Nullable savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        moviesListViewModel = ViewModelProviders.of(this).get(MoviesListViewModel::class.java)
         moviesViewManager = LinearLayoutManager(this.context)
         moviesListAdapter = MoviesListAdapter(object :
             OnItemClickListener {
