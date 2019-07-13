@@ -77,7 +77,7 @@ internal class MovieDetailViewModelTest {
 
         //Verifying observer called when no movie found
         moviesDetailViewModel.getMovie(UNKNOWN_MOVIE_ID).observe(MoviesLifeCycleOwner(), observer)
-        moviesDetailViewModel.movieFailure.observe(MoviesLifeCycleOwner(), failureObserver)
+        moviesDetailViewModel.failure.observe(MoviesLifeCycleOwner(), failureObserver)
         moviesDetailViewModel.loadMovie()
 
         //failureObserver

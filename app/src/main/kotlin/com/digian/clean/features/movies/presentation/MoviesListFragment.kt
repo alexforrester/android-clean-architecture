@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.digian.clean.R
+import com.digian.clean.features.core.data.exception.Failures
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import kotlinx.android.synthetic.main.fragment_movies.*
 
@@ -57,7 +58,12 @@ class MoviesListFragment : Fragment() {
             layoutManager = moviesViewManager
             adapter = moviesListAdapter
 
-            addItemDecoration(DividerItemDecoration(context, (layoutManager as LinearLayoutManager).orientation))
+            addItemDecoration(
+                DividerItemDecoration(
+                    context,
+                    (layoutManager as LinearLayoutManager).orientation
+                )
+            )
         }
 
         moviesListViewModel.movies.observe(this,
@@ -67,8 +73,12 @@ class MoviesListFragment : Fragment() {
 
         moviesListViewModel.failure.observe(this,
             Observer { failure ->
-            Toast.makeText(activity, "movieFailure is $failure", Toast.LENGTH_LONG).show()
-        })
+                Toast.makeText(
+                    activity,
+                    getString(R.string.movie_detail_loading_error).plus((failure as? Failures)?.exception?.message),
+                    Toast.LENGTH_LONG
+                ).show()
+            })
 
         moviesListViewModel.loadMovies()
     }

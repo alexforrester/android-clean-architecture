@@ -9,12 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.digian.clean.R
+import com.digian.clean.features.core.data.exception.Failures
 import com.digian.clean.features.movies.domain.entities.GenreEntity
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.squareup.picasso.Callback
@@ -84,25 +86,33 @@ class MovieDetailFragment : Fragment() {
                     }
                     movie_title.text = movieDetail.title
                     movie_description.text = movieDetail.overview
-                    movie_votes.text = if (movieDetail.voteCount != -1) "VOTES: ${movieDetail.voteCount}" else ""
+                    movie_votes.text =
+                        if (movieDetail.voteCount != -1) "VOTES: ${movieDetail.voteCount}" else ""
                     loadImageView(movieDetail.imagePath)
                     return@Observer
                 }
 
-                addErrorView()
-
             })
+
+        movieDetailViewModel.failure.observe(this,
+            Observer { failure ->
+                addErrorView(failure as? Failures)
+            })
+
         movieDetailViewModel.loadMovie()
     }
 
-    private fun addErrorView() {
+    private fun addErrorView(failureException: Failures?) {
 
         val errorTextView = TextView(activity)
-        errorTextView.text = getString(R.string.movie_detail_loading_error)
+        errorTextView.text = getString(R.string.movie_detail_loading_error).plus(failureException?.exception?.message ?: "")
         errorTextView.gravity = Gravity.CENTER
         errorTextView.textSize = 20f
         errorTextView.layoutParams =
-            ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            ConstraintLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            );
         movie_detail_root.addView(errorTextView)
     }
 

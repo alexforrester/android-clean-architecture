@@ -3,7 +3,6 @@ package com.digian.clean.features.movies.presentation
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.digian.clean.features.core.data.exception.Failures
 import com.digian.clean.features.core.data.platform.NetworkHandler
 import com.digian.clean.features.core.domain.exception.Failure
 import com.digian.clean.features.core.domain.ports.UseCaseInput
@@ -12,7 +11,6 @@ import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.digian.clean.features.movies.domain.repository.MoviesRepository
 import com.digian.clean.features.movies.domain.usecases.GetMoviesUseCase
 import timber.log.Timber
-
 
 /**
  * Created by Alex Forrester on 23/04/20
@@ -35,7 +33,6 @@ open class MoviesListViewModel(application: Application) : AndroidViewModel(appl
     }
 
     private fun handleFailure(failure: Failure) {
-
         Timber.d(this.failure.toString())
         this.failure.value = failure
 

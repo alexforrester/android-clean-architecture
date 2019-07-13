@@ -21,7 +21,7 @@ open class MovieDetailViewModel(application: Application) : AndroidViewModel(app
     private val movie: MutableLiveData<MovieEntity> = MutableLiveData()
     private var movieId = -1
 
-    val movieFailure: MutableLiveData<Failure> = MutableLiveData()
+    val failure: MutableLiveData<Failure> = MutableLiveData()
 
     fun getMovie(movieId : Int) : LiveData<MovieEntity>{
         this.movieId = movieId
@@ -40,7 +40,7 @@ open class MovieDetailViewModel(application: Application) : AndroidViewModel(app
     }
 
     private fun handleFailure(failure: Failure) {
-        movieFailure.value = failure
+        this.failure.value = failure
     }
 
     private fun handleSuccess(movie: MovieEntity) {

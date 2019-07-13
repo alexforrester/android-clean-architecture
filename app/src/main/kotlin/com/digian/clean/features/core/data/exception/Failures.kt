@@ -8,7 +8,7 @@ import java.lang.Exception
 /**
  * Created by Alex Forrester on 2019-05-15.
  *
- * Class for handling errors/movieFailure/exceptions
+ * Class for handling errors/failure/exceptions
  *
  * Inspired by Class below
  *
@@ -20,6 +20,6 @@ sealed class Failures(val exception: Exception) : Failure {
     class ServerException(exception : Exception) : Failures(exception)
     class ParsingException(jsonDataException : JsonDataException) : Failures(jsonDataException)
 
-    /** * Extend this class for feature specific movieFailure.*/
+    /** * Extend this class for feature specific failure.*/
     abstract class FeatureFailure(exception : Exception) : Failures(exception)
 }
