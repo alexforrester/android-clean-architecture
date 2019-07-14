@@ -34,7 +34,7 @@ open class MoviesRepositoryImpl(
     private val networkHandler: NetworkHandler
 ) : MoviesRepository {
 
-    override fun getMovieDetail(movieIdInput: UseCaseInput.Single<Int>): UseCaseOutput<Failure, MovieEntity> {
+    override suspend fun getMovieDetail(movieIdInput: UseCaseInput.Single<Int>): UseCaseOutput<Failure, MovieEntity> {
 
         if (!networkHandler.isConnected) {
             return UseCaseOutput.Error(Failures.NetworkUnavailable(NetworkConnectionException(NETWORK_UNAVAILABLE)))
@@ -58,7 +58,7 @@ open class MoviesRepositoryImpl(
         }
     }
 
-    override fun getMovies(none: UseCaseInput.None): UseCaseOutput<Failure, List<MovieEntity>> {
+    override suspend fun getMovies(none: UseCaseInput.None): UseCaseOutput<Failure, List<MovieEntity>> {
 
         if (!networkHandler.isConnected) {
             return UseCaseOutput.Error(Failures.NetworkUnavailable(NetworkConnectionException(NETWORK_UNAVAILABLE)))
@@ -77,7 +77,7 @@ open class MoviesRepositoryImpl(
 
     }
 
-    private fun getMovieEntities(): List<MovieEntity> {
+    private suspend fun getMovieEntities(): List<MovieEntity> {
         val moviesJson = getMovieJSON()
 
         val listType = Types.newParameterizedType(List::class.java, MovieData::class.java)
@@ -91,13 +91,13 @@ open class MoviesRepositoryImpl(
         return moviesEntities
     }
 
-    private fun getMovieJSON(fileName: String = "popular_movies_list.json"): String {
+    private suspend fun getMovieJSON(fileName: String = "popular_movies_list.json"): String {
         val inputStream = getInputStreamForJsonFile(fileName)
         return inputStream.bufferedReader().use { it.readText() }
     }
 
     @Throws(IOException::class)
-    internal open fun getInputStreamForJsonFile(fileName: String): InputStream {
+    internal open suspend fun getInputStreamForJsonFile(fileName: String): InputStream {
         return context.assets.open(fileName)
     }
 }

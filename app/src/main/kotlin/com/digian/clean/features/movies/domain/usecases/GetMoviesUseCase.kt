@@ -8,5 +8,5 @@ import com.digian.clean.features.movies.domain.repository.MoviesRepository
 
 open class GetMoviesUseCase(private val moviesRepository: MoviesRepository) {
 
-    operator fun invoke(none: UseCaseInput.None): UseCaseOutput<Failure, List<MovieEntity>> = moviesRepository.getMovies(none)
+   suspend operator fun invoke(none: UseCaseInput.None): UseCaseOutput<Failure, List<MovieEntity>> = moviesRepository.getMovies(none)
 }

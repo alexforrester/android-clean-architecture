@@ -2,10 +2,15 @@ package com.digian.clean.features.movies.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.digian.clean.features.core.domain.exception.Failure
 import com.digian.clean.features.core.domain.ports.UseCaseInput
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.digian.clean.features.movies.domain.usecases.GetMoviesUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 /**
@@ -16,10 +21,19 @@ open class MoviesListViewModel(val getMoviesUseCase: GetMoviesUseCase) : ViewMod
     val failure: MutableLiveData<Failure> = MutableLiveData()
     val movies: MutableLiveData<List<MovieEntity>> = MutableLiveData()
 
-    //TODO("Add coroutines to run off main thread")
     fun loadMovies() {
-        getMoviesUseCase(UseCaseInput.None).successOrError(::handleFailure, ::handleSuccess)
+        viewModelScope.launch {
+            val useCaseOutputDeferred = async { get() }
+            val useCaseOutput = useCaseOutputDeferred.await()
+            useCaseOutput.successOrError(::handleFailure, ::handleSuccess)
+        }
     }
+
+    suspend fun get() =
+        withContext(Dispatchers.IO) {
+            // Dispatchers.IO (main-safety block)
+            getMoviesUseCase(UseCaseInput.None)
+        }
 
     private fun handleFailure(failure: Failure) {
         Timber.d(this.failure.toString())

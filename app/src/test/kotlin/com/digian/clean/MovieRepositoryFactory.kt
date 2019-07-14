@@ -30,7 +30,7 @@ internal object MovieRepositoryFactory {
         MoshiFactory.moshi,
         networkHandler = networkHandlerConnected
     ) {
-        override fun getInputStreamForJsonFile(fileName: String): InputStream {
+        override suspend fun getInputStreamForJsonFile(fileName: String): InputStream {
             return FileInputStream(ASSET_BASE_PATH + fileName)
         }
     }
@@ -40,11 +40,11 @@ internal object MovieRepositoryFactory {
         MoshiFactory.moshi,
         networkHandler = networkHandlerConnected
     ) {
-        override fun getInputStreamForJsonFile(fileName: String): InputStream {
+        override suspend fun getInputStreamForJsonFile(fileName: String): InputStream {
             return FileInputStream(ASSET_BASE_PATH + fileName)
         }
 
-        override fun getMovies(none: UseCaseInput.None): UseCaseOutput<Failure, List<MovieEntity>> {
+        override suspend fun getMovies(none: UseCaseInput.None): UseCaseOutput<Failure, List<MovieEntity>> {
             return UseCaseOutput.Error(Failures.ServerException(Exception()))
         }
     }

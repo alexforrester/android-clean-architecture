@@ -3,6 +3,8 @@ package com.digian.clean.features.movies.presentation
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.IdlingResource
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -10,9 +12,11 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.digian.clean.R
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+
 
 /**
  * Created by Alex Forrester on 2019-04-25.
@@ -24,9 +28,22 @@ private const val ITEM_TITLE_BELOW_THE_FOLD = "12 Angry Men"
 @RunWith(AndroidJUnit4::class)
 class MoviesListScreenTest {
 
+    private var idlingResource: IdlingResource? = null
+    /**
+     * Use [to launch and get access to the activity.][ActivityScenario.onActivity]
+     */
     @Before
-    fun launchActivity() {
-        ActivityScenario.launch(MoviesActivity::class.java)
+    fun registerIdlingResource() {
+        val activityScenario = ActivityScenario.launch(MoviesActivity::class.java)
+        activityScenario.onActivity {
+            ActivityScenario.ActivityAction<MoviesActivity> { activity ->
+                if (activity != null) {
+                    idlingResource = activity.getIdlingResource()
+                }
+                // To prove that the test fails, omit this call:
+                IdlingRegistry.getInstance().register(idlingResource);
+            }
+        }
     }
 
     @Test
@@ -74,7 +91,10 @@ class MoviesListScreenTest {
         val movieGenres = "GENRES: Drama"
 
         onView(withId(R.id.movies_recycler_view)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(ITEM_BELOW_THE_FOLD, click())
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                ITEM_BELOW_THE_FOLD,
+                click()
+            )
         )
 
         onView(withText(movieTitleText)).check(matches(isDisplayed()))
@@ -82,6 +102,14 @@ class MoviesListScreenTest {
         onView(withText(movieVotes)).check(matches(isDisplayed()))
         onView(withText(movieGenres)).check(matches(isDisplayed()))
         onView(withId(R.id.movie_image)).check(matches(isDisplayed()))
+    }
+
+
+    @After
+    fun unregisterIdlingResource() {
+        if (idlingResource != null) {
+            IdlingRegistry.getInstance().unregister(idlingResource)
+        }
     }
 
 }

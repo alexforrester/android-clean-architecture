@@ -11,6 +11,5 @@ import com.digian.clean.features.movies.domain.repository.MoviesRepository
  */
 class GetMovieDetailUseCase(private val moviesRepository: MoviesRepository) {
 
-    operator fun invoke(movieIdInput: UseCaseInput.Single<Int>): UseCaseOutput<Failure, MovieEntity> = moviesRepository.getMovieDetail(movieIdInput)
-
+    suspend operator fun invoke(movieIdInput: UseCaseInput.Single<Int>): UseCaseOutput<Failure, MovieEntity> = moviesRepository.getMovieDetail(movieIdInput)
 }

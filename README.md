@@ -1,6 +1,8 @@
 # android-clean-architecture
 
-[![Kotlin](https://kotlin.link/awesome-kotlin.svg)](https://kotlinlang.org/)  [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Kotlin](https://kotlin.link/awesome-kotlin.svg)](https://kotlinlang.org/)
+[![Kotlin Version](https://img.shields.io/badge/kotlin-1.3.21-blue.svg)](http://kotlinlang.org/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 A movies sample android project in Kotlin which uses clean architecture
 
@@ -20,7 +22,8 @@ The presentation and data layers are only aware of the domain layer and not each
 ### Package Details and Flow
 
 The app is packaged by feature underneath which is the core package containing common classes for all layers and in this case the movies package which has data, domain and presentation packages. This structure enables new developers to quickly get up-to-speed as it is familiar and repeatable.
-\The controller in the Clean architecture diagram is typically user interaction from a fragment observing a live data object in a viewmodel. View Models have access to use cases which reference repositories. Strict port conventions are followed so data is passed through a Use Case input port into the use case. The results of the use case logic often referred to as an interactor are then returned to the presenter through and Output port. This can contain entities to display in the presentation layer as well as Failures. All results update live data in the view model which updates the UI through observers in fragments.
+\
+The controller in the Clean architecture diagram is typically user interaction from a fragment observing a live data object in a ViewModel. ViewModel have access to use cases which reference repositories. Strict port conventions are followed so data is passed through a UseCaseInput port into the Use Case. The results of the Use Case logic often referred to as an interactor are then returned to the presenter through a UseCaseOutput port. This can contain entities to display in the presentation layer as well as Failures. All results update LiveData in the ViewModel which updates the UI through observers in fragments.
 The controller and presenter in this Clean Architecture pattern are both implemented by the View Model.
 
 ### Frameworks and Libraries

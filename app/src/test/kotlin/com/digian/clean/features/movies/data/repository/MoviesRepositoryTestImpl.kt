@@ -10,6 +10,7 @@ import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.digian.clean.features.movies.domain.repository.MoviesRepository
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -38,7 +39,7 @@ internal class MoviesRepositoryTest {
     private val moviesRepository: MoviesRepository = object :
         MoviesRepositoryImpl(mockk(), moshi, networkHandler = networkHandlerConnected) {
 
-        override fun getInputStreamForJsonFile(fileName: String): InputStream {
+        override suspend fun getInputStreamForJsonFile(fileName: String): InputStream {
             return FileInputStream(ASSET_BASE_PATH + fileName)
         }
     }
@@ -46,7 +47,7 @@ internal class MoviesRepositoryTest {
     private val moviesRepositoryNoNetwork: MoviesRepository = object :
         MoviesRepositoryImpl(mockk(), moshi, networkHandler = networkHandlerNotConnected) {
 
-        override fun getInputStreamForJsonFile(fileName: String): InputStream {
+        override suspend fun getInputStreamForJsonFile(fileName: String): InputStream {
             return FileInputStream(ASSET_BASE_PATH + fileName)
         }
     }
@@ -54,7 +55,7 @@ internal class MoviesRepositoryTest {
     @Test
     internal fun `given live data movie list is called, when no network connection, then Network Unavailable message returned`() {
 
-        val popularMovies = moviesRepositoryNoNetwork.getMovies(UseCaseInput.None)
+        val popularMovies = runBlocking {  moviesRepositoryNoNetwork.getMovies(UseCaseInput.None)}
 
         popularMovies.successOrError({
             assertTrue(it is Failures.NetworkUnavailable)
@@ -68,7 +69,9 @@ internal class MoviesRepositoryTest {
     @Test
     internal fun `given live data movie detail is called, when no network connection, then Network Unavailable message returned`() {
 
-        val popularMovies = moviesRepositoryNoNetwork.getMovieDetail(UseCaseInput.Single(278))
+        val popularMovies =
+
+            runBlocking { moviesRepositoryNoNetwork.getMovieDetail(UseCaseInput.Single(278)) }
 
         popularMovies.successOrError({
             assertTrue(it is Failures.NetworkUnavailable)
@@ -81,7 +84,7 @@ internal class MoviesRepositoryTest {
     @Test
     internal fun `given live data movie list is called, when flat json file parsed, then individual movie has correct state`() {
 
-        val popularMovies = moviesRepository.getMovies(UseCaseInput.None)
+        val popularMovies = runBlocking {  moviesRepository.getMovies(UseCaseInput.None) }
 
         popularMovies.successOrError({
 

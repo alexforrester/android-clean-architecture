@@ -69,6 +69,7 @@ class MoviesListFragment : Fragment() {
         moviesListViewModel.movies.observe(this,
             Observer<List<MovieEntity>> { popularMovies ->
                 moviesListAdapter.data = popularMovies
+                moviesListAdapter.notifyDataSetChanged()
             })
 
         moviesListViewModel.failure.observe(this,
