@@ -1,4 +1,4 @@
-package com.digian.clean.features.core.domain.ports
+package com.digian.clean.core.domain.ports
 
 /**
  * Created by Alex Forrester on 2019-07-12.

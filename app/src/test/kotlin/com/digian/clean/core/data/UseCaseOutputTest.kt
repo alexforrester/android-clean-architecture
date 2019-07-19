@@ -1,9 +1,9 @@
-package com.digian.clean.features.core.data
+package com.digian.clean.core.data
 
-import com.digian.clean.features.core.data.exception.Failures
-import com.digian.clean.features.core.data.exception.NETWORK_UNAVAILABLE
-import com.digian.clean.features.core.data.exception.NetworkConnectionException
-import com.digian.clean.features.core.domain.ports.UseCaseOutput
+import com.digian.clean.core.data.exception.Failures
+import com.digian.clean.core.data.exception.NETWORK_UNAVAILABLE
+import com.digian.clean.core.data.exception.NetworkConnectionException
+import com.digian.clean.core.domain.ports.UseCaseOutput
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.Test

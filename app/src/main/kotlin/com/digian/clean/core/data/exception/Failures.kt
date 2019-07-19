@@ -1,6 +1,6 @@
-package com.digian.clean.features.core.data.exception
+package com.digian.clean.core.data.exception
 
-import com.digian.clean.features.core.domain.exception.Failure
+import com.digian.clean.core.domain.exception.Failure
 import com.squareup.moshi.JsonDataException
 
 
@@ -11,7 +11,7 @@ import com.squareup.moshi.JsonDataException
  *
  * Inspired by Class below
  *
- * @see <a href="https://github.com/android10/Android-CleanArchitecture-Kotlin/blob/master/app/src/main/kotlin/com/fernandocejas/sample/core/exception/Failures.ktt">Fernando Cejas Clean Kotlin Architecture</a>
+ * @see <a href="https://github.com/android10/Android-CleanArchitecture-Kotlin/blob/master/app/src/main/kotlin/com/fernandocejas/sample/core/exception/Failure.kt">Fernando Cejas Clean Kotlin Architecture</a>
  *
  */
 sealed class Failures(val exception: Exception) : Failure {

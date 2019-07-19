@@ -4,7 +4,7 @@ import androidx.lifecycle.Observer
 import com.digian.clean.InstantExecutorExtension
 import com.digian.clean.MovieRepositoryFactory
 import com.digian.clean.MoviesLifeCycleOwner
-import com.digian.clean.features.core.domain.exception.Failure
+import com.digian.clean.core.domain.exception.Failure
 import com.digian.clean.features.movies.domain.entities.GenreEntity
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.digian.clean.features.movies.domain.usecases.GetMovieDetailUseCase
@@ -13,8 +13,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
-import org.junit.After
-import org.junit.Ignore
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Disabled

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.digian.clean.R
-import com.digian.clean.features.core.data.exception.Failures
+import com.digian.clean.core.data.exception.Failures
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import kotlinx.android.synthetic.main.fragment_movies.*
 import org.koin.androidx.viewmodel.ext.android.viewModel

@@ -1,4 +1,4 @@
-package com.digian.clean.features.core.data.platform
+package com.digian.clean.core.data.platform
 
 import android.content.Context
 import android.net.NetworkInfo

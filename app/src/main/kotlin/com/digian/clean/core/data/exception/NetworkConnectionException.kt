@@ -1,4 +1,4 @@
-package com.digian.clean.features.core.data.exception
+package com.digian.clean.core.data.exception
 
 /**
  * Created by Alex Forrester on 2019-07-11.

@@ -1,4 +1,4 @@
-package com.digian.clean.features.core.data
+package com.digian.clean.core.data
 
 /**
  * Created by Alex Forrester on 04/04/2019.

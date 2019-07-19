@@ -1,13 +1,13 @@
 package com.digian.clean.features.movies.data.repository
 
 import android.content.Context
-import com.digian.clean.features.core.data.exception.Failures
-import com.digian.clean.features.core.data.exception.NETWORK_UNAVAILABLE
-import com.digian.clean.features.core.data.exception.NetworkConnectionException
-import com.digian.clean.features.core.data.platform.NetworkHandler
-import com.digian.clean.features.core.domain.exception.Failure
-import com.digian.clean.features.core.domain.ports.UseCaseInput
-import com.digian.clean.features.core.domain.ports.UseCaseOutput
+import com.digian.clean.core.data.exception.Failures
+import com.digian.clean.core.data.exception.NETWORK_UNAVAILABLE
+import com.digian.clean.core.data.exception.NetworkConnectionException
+import com.digian.clean.core.data.platform.NetworkHandler
+import com.digian.clean.core.domain.exception.Failure
+import com.digian.clean.core.domain.ports.UseCaseInput
+import com.digian.clean.core.domain.ports.UseCaseOutput
 import com.digian.clean.features.movies.data.MovieData
 import com.digian.clean.features.movies.data.exception.MovieCollectionException
 import com.digian.clean.features.movies.data.mappers.MovieDataEntityMapper

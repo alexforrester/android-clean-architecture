@@ -1,6 +1,6 @@
-package com.digian.clean.features.core.domain.ports
+package com.digian.clean.core.domain.ports
 
-import com.digian.clean.features.core.domain.exception.Failure
+import com.digian.clean.core.domain.exception.Failure
 
 
 /**

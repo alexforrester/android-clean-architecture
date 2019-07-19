@@ -14,7 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.digian.clean.R
-import com.digian.clean.features.core.data.exception.Failures
+import com.digian.clean.core.data.exception.Failures
 import com.digian.clean.features.movies.domain.entities.GenreEntity
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.squareup.picasso.Callback

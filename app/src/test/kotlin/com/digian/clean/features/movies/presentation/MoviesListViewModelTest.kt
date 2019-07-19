@@ -4,10 +4,10 @@ import androidx.lifecycle.Observer
 import com.digian.clean.InstantExecutorExtension
 import com.digian.clean.MovieRepositoryFactory
 import com.digian.clean.MoviesLifeCycleOwner
-import com.digian.clean.features.core.data.exception.Failures
-import com.digian.clean.features.core.domain.exception.Failure
-import com.digian.clean.features.core.domain.ports.UseCaseInput
-import com.digian.clean.features.core.domain.ports.UseCaseOutput
+import com.digian.clean.core.data.exception.Failures
+import com.digian.clean.core.domain.exception.Failure
+import com.digian.clean.core.domain.ports.UseCaseInput
+import com.digian.clean.core.domain.ports.UseCaseOutput
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.digian.clean.features.movies.domain.repository.MoviesRepository
 import com.digian.clean.features.movies.domain.usecases.GetMoviesUseCase

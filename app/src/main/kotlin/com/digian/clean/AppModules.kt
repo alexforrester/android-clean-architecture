@@ -1,6 +1,6 @@
 package com.digian.clean
 
-import com.digian.clean.features.core.data.platform.NetworkHandler
+import com.digian.clean.core.data.platform.NetworkHandler
 import com.digian.clean.features.movies.data.adapters.GenreAdapter
 import com.digian.clean.features.movies.data.api.MoviesAPI
 import com.digian.clean.features.movies.data.repository.MoviesRepositoryImpl

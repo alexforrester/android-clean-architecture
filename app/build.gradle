@@ -34,6 +34,7 @@ android {
         abortOnError true
         ignoreWarnings false
     }
+
 }
 
 dependencies {
