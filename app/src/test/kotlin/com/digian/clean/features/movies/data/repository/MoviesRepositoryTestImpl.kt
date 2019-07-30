@@ -4,7 +4,7 @@ import com.digian.clean.InstantExecutorExtension
 import com.digian.clean.MoshiFactory
 import com.digian.clean.core.data.exception.Failures
 import com.digian.clean.core.data.platform.NetworkHandler
-import com.digian.clean.core.domain.ports.UseCaseInput
+import com.digian.clean.core.domain.usecases.UseCaseInput
 import com.digian.clean.features.movies.domain.entities.GenreEntity
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.digian.clean.features.movies.domain.repository.MoviesRepository

@@ -16,8 +16,8 @@ import com.squareup.moshi.JsonDataException
  */
 sealed class Failures(val exception: Exception) : Failure {
     class NetworkUnavailable(networkConnectionException: NetworkConnectionException) : Failures(networkConnectionException)
-    class ServerException(exception : Exception) : Failures(exception)
-    class ParsingException(jsonDataException : JsonDataException) : Failures(jsonDataException)
+    class ServerException(exception: Exception) : Failures(exception)
+    class ParsingException(jsonDataException: JsonDataException) : Failures(jsonDataException)
 
     /** * Extend this class for feature specific failure.*/
     abstract class FeatureFailure(exception : Exception) : Failures(exception)

@@ -1,8 +1,8 @@
 package com.digian.clean.features.movies.domain.repository
 
 import com.digian.clean.core.domain.exception.Failure
-import com.digian.clean.core.domain.ports.UseCaseInput
-import com.digian.clean.core.domain.ports.UseCaseOutput
+import com.digian.clean.core.domain.usecases.UseCaseInput
+import com.digian.clean.core.domain.usecases.UseCaseOutput
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 
 interface MoviesRepository {

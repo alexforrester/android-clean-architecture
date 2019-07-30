@@ -1,4 +1,4 @@
-package com.digian.clean.core.domain.ports
+package com.digian.clean.core.domain.usecases
 
 import com.digian.clean.core.domain.exception.Failure
 

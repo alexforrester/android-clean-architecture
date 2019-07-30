@@ -3,8 +3,8 @@ package com.digian.clean
 import com.digian.clean.core.data.exception.Failures
 import com.digian.clean.core.data.platform.NetworkHandler
 import com.digian.clean.core.domain.exception.Failure
-import com.digian.clean.core.domain.ports.UseCaseInput
-import com.digian.clean.core.domain.ports.UseCaseOutput
+import com.digian.clean.core.domain.usecases.UseCaseInput
+import com.digian.clean.core.domain.usecases.UseCaseOutput
 import com.digian.clean.features.movies.data.repository.ASSET_BASE_PATH
 import com.digian.clean.features.movies.data.repository.MoviesRepositoryImpl
 import com.digian.clean.features.movies.domain.entities.MovieEntity

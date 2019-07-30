@@ -6,8 +6,8 @@ import com.digian.clean.core.data.exception.NETWORK_UNAVAILABLE
 import com.digian.clean.core.data.exception.NetworkConnectionException
 import com.digian.clean.core.data.platform.NetworkHandler
 import com.digian.clean.core.domain.exception.Failure
-import com.digian.clean.core.domain.ports.UseCaseInput
-import com.digian.clean.core.domain.ports.UseCaseOutput
+import com.digian.clean.core.domain.usecases.UseCaseInput
+import com.digian.clean.core.domain.usecases.UseCaseOutput
 import com.digian.clean.features.movies.data.MovieData
 import com.digian.clean.features.movies.data.exception.MovieCollectionException
 import com.digian.clean.features.movies.data.mappers.MovieDataEntityMapper
@@ -40,7 +40,7 @@ open class MoviesRepositoryImpl(
             return UseCaseOutput.Error(Failures.NetworkUnavailable(NetworkConnectionException(NETWORK_UNAVAILABLE)))
         }
 
-        val movieId = movieIdInput.param
+        val movieId = movieIdInput.data
         val movies = getMovieEntities()
 
         return try {

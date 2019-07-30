@@ -5,6 +5,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.espresso.IdlingResource
 import com.digian.clean.R
+import com.digian.clean.features.movies.presentation.IdlingResource.SimpleIdlingResource
 
 
 /**
@@ -25,7 +26,8 @@ class MoviesActivity : AppCompatActivity() {
     @VisibleForTesting
     fun getIdlingResource(): IdlingResource {
         if (idlingResource == null) {
-            idlingResource = SimpleIdlingResource()
+            idlingResource =
+                SimpleIdlingResource()
         }
         return idlingResource as SimpleIdlingResource
     }

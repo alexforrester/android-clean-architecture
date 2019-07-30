@@ -1,4 +1,4 @@
-package com.digian.clean.features.movies.presentation
+package com.digian.clean.features.movies.presentation.IdlingResource
 /*
  * Copyright 2016, The Android Open Source Project
  *
@@ -48,7 +48,7 @@ class SimpleIdlingResource : IdlingResource {
 
     /**
      * Sets the new idle state, if isIdleNow is true, it pings the [ResourceCallback].
-     * @param isIdleNow false if there are pending operations, true if idle.
+     * @data isIdleNow false if there are pending operations, true if idle.
      */
     fun setIdleState(isIdleNow: Boolean) {
         mIsIdleNow.set(isIdleNow)

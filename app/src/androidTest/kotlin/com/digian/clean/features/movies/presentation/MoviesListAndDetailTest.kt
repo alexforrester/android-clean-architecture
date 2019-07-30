@@ -22,7 +22,7 @@ import org.junit.runner.RunWith
  * Created by Alex Forrester on 2019-04-25.
  */
 private const val ITEM_BELOW_THE_FOLD = 14
-private const val ITEM_TITLE_ABOVE_THE_FOLD = "The Godfather"
+private const val ITEM_TITLE_ABOVE_THE_FOLD = "The Dark Knight"
 private const val ITEM_TITLE_BELOW_THE_FOLD = "12 Angry Men"
 
 @RunWith(AndroidJUnit4::class)
