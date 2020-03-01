@@ -19,9 +19,13 @@ import androidx.test.espresso.IdlingResource
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
+ * Taken from android testing-samples:
+ *
+ * See <a href="https://github.com/android/testing-samples/blob/master/ui/espresso/IdlingResourceSample/app/src/main/java/com/example/android/testing/espresso/IdlingResourceSample/IdlingResource/SimpleIdlingResource.java" />
+ *
  * A very simple implementation of [IdlingResource].
  *
- *
+ * @link h*
  * Consider using CountingIdlingResource from espresso-contrib package if you use this class from
  * multiple threads or need to keep a count of pending operations.
  */

@@ -28,7 +28,7 @@ class MoviesListFragment : Fragment() {
     private lateinit var moviesListAdapter: MoviesListAdapter
     private lateinit var moviesViewManager: RecyclerView.LayoutManager
 
-    val moviesListViewModel : MoviesListViewModel by viewModel()
+    private val moviesListViewModel: MoviesListViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,15 +41,14 @@ class MoviesListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         moviesViewManager = LinearLayoutManager(this.context)
-        moviesListAdapter = MoviesListAdapter(object :
-            OnItemClickListener {
+        moviesListAdapter = MoviesListAdapter(object : OnItemClickListener {
             override fun onItemClick(movieEntity: MovieEntity) {
-                val action =
-                    MoviesListFragmentDirections.actionMoviesFragmentToMovieDetailFragment(
-                        movieEntity.id
-                    )
+                val action = MoviesListFragmentDirections.actionMoviesFragmentToMovieDetailFragment(
+                    movieEntity.id
+                )
                 findNavController().navigate(action)
             }
+
         })
 
         moviesRecyclerView = movies_recycler_view.apply {
@@ -66,13 +65,13 @@ class MoviesListFragment : Fragment() {
             )
         }
 
-        moviesListViewModel.movies.observe(MoviesListFragment@this,
+        moviesListViewModel.movies.observe(MoviesListFragment@ this,
             Observer<List<MovieEntity>> { popularMovies ->
                 moviesListAdapter.data = popularMovies
                 moviesListAdapter.notifyDataSetChanged()
             })
 
-        moviesListViewModel.failure.observe(MoviesListFragment@this,
+        moviesListViewModel.failure.observe(MoviesListFragment@ this,
             Observer { failure ->
                 Toast.makeText(
                     activity,

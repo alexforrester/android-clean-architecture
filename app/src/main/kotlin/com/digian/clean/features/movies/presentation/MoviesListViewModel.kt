@@ -4,35 +4,32 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.digian.clean.core.domain.exception.Failure
-import com.digian.clean.core.domain.usecases.UseCaseInput
+import com.digian.clean.core.domain.ports.UseCaseInputPort
+import com.digian.clean.core.domain.ports.UseCaseOutputPort
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.digian.clean.features.movies.domain.usecases.GetMoviesUseCase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import timber.log.Timber
 
 /**
  * Created by Alex Forrester on 23/04/20
  */
-open class MoviesListViewModel(val getMoviesUseCase: GetMoviesUseCase) : ViewModel() {
+class MoviesListViewModel(val getMoviesUseCase: GetMoviesUseCase) : ViewModel() {
 
     val failure: MutableLiveData<Failure> = MutableLiveData()
     val movies: MutableLiveData<List<MovieEntity>> = MutableLiveData()
 
     fun loadMovies() {
         viewModelScope.launch {
-            val useCaseOutputDeferred = async { get() }
-            val useCaseOutput = useCaseOutputDeferred.await()
-            useCaseOutput.successOrError(::handleFailure, ::handleSuccess)
+            val useCaseOutputDeferred = async { getMovieList() }
+            val useCaseOutputPort = useCaseOutputDeferred.await()
+            useCaseOutputPort.successOrError(::handleFailure, ::handleSuccess)
         }
     }
 
-    suspend fun get() =
+    private suspend fun getMovieList(): UseCaseOutputPort<Failure, List<MovieEntity>> =
         withContext(Dispatchers.IO) {
-            // Dispatchers.IO (main-safety block)
-            getMoviesUseCase(UseCaseInput.None)
+            getMoviesUseCase(UseCaseInputPort.None)
         }
 
     private fun handleFailure(failure: Failure) {

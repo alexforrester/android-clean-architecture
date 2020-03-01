@@ -4,7 +4,7 @@ import com.digian.clean.InstantExecutorExtension
 import com.digian.clean.MoshiFactory
 import com.digian.clean.core.data.exception.Failures
 import com.digian.clean.core.data.platform.NetworkHandler
-import com.digian.clean.core.domain.usecases.UseCaseInput
+import com.digian.clean.core.domain.ports.UseCaseInputPort
 import com.digian.clean.features.movies.domain.entities.GenreEntity
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.digian.clean.features.movies.domain.repository.MoviesRepository
@@ -55,7 +55,7 @@ internal class MoviesRepositoryTest {
     @Test
     internal fun `given live data movie list is called, when no network connection, then Network Unavailable message returned`() {
 
-        val popularMovies = runBlocking {  moviesRepositoryNoNetwork.getMovies(UseCaseInput.None)}
+        val popularMovies = runBlocking {  moviesRepositoryNoNetwork.getMovies(UseCaseInputPort.None)}
 
         popularMovies.successOrError({
             assertTrue(it is Failures.NetworkUnavailable)
@@ -71,7 +71,7 @@ internal class MoviesRepositoryTest {
 
         val popularMovies =
 
-            runBlocking { moviesRepositoryNoNetwork.getMovieDetail(UseCaseInput.Single(278)) }
+            runBlocking { moviesRepositoryNoNetwork.getMovieDetail(UseCaseInputPort.Single(278)) }
 
         popularMovies.successOrError({
             assertTrue(it is Failures.NetworkUnavailable)
@@ -84,7 +84,7 @@ internal class MoviesRepositoryTest {
     @Test
     internal fun `given live data movie list is called, when flat json file parsed, then individual movie has correct state`() {
 
-        val popularMovies = runBlocking {  moviesRepository.getMovies(UseCaseInput.None) }
+        val popularMovies = runBlocking {  moviesRepository.getMovies(UseCaseInputPort.None) }
 
         popularMovies.successOrError({
 

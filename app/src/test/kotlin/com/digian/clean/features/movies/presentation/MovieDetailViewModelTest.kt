@@ -25,7 +25,6 @@ import org.junit.jupiter.api.extension.ExtendWith
  * TODO("Fix failing coroutines tests")
  */
 @ExtendWith(InstantExecutorExtension::class)
-@Disabled
 internal class MovieDetailViewModelTest {
 
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")

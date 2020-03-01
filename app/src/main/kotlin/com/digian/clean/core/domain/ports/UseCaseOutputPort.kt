@@ -1,4 +1,4 @@
-package com.digian.clean.core.domain.usecases
+package com.digian.clean.core.domain.ports
 
 import com.digian.clean.core.domain.exception.Failure
 
@@ -14,12 +14,12 @@ import com.digian.clean.core.domain.exception.Failure
  *
  * It is used as the Use Case output port
  **/
-sealed class UseCaseOutput<out FailureType: Failure, out Type> {
+sealed class UseCaseOutputPort<out FailureType: Failure, out Type> {
 
     /** Represents modified left side of [Either] type class which by convention is a "Failures". */
-    class Error<out FailureType : Failure>(val failure: FailureType) : UseCaseOutput<FailureType, Nothing>()
+    class Error<out FailureType : Failure>(val failure: FailureType) : UseCaseOutputPort<FailureType, Nothing>()
     /** Represents modified right side of [Either] type class which by convention is a "Success". */
-    class Success<out Type>(val data: Type) : UseCaseOutput<Nothing, Type>()
+    class Success<out Type>(val data: Type) : UseCaseOutputPort<Nothing, Type>()
 
     fun successOrError(functionFailure: (FailureType) -> Any, functionType: (Type) -> Any): Any =
         when (this) {

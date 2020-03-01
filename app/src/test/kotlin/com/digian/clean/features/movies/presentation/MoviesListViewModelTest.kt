@@ -6,8 +6,8 @@ import com.digian.clean.MovieRepositoryFactory
 import com.digian.clean.MoviesLifeCycleOwner
 import com.digian.clean.core.data.exception.Failures
 import com.digian.clean.core.domain.exception.Failure
-import com.digian.clean.core.domain.usecases.UseCaseInput
-import com.digian.clean.core.domain.usecases.UseCaseOutput
+import com.digian.clean.core.domain.ports.UseCaseInputPort
+import com.digian.clean.core.domain.ports.UseCaseOutputPort
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.digian.clean.features.movies.domain.repository.MoviesRepository
 import com.digian.clean.features.movies.domain.usecases.GetMoviesUseCase
@@ -29,7 +29,6 @@ import org.junit.jupiter.api.extension.ExtendWith
  * TODO("Fix failing coroutines tests")
  */
 @ExtendWith(InstantExecutorExtension::class)
-@Disabled
 internal class MoviesListViewModelTest {
 
     private val moviesListViewModel: MoviesListViewModel = MoviesListViewModel(
@@ -89,7 +88,7 @@ internal class MoviesListViewModelTest {
         every { failureObserver.onChanged(any()) } just Runs
 
         val mockRepository = mockk<MoviesRepository>()
-        every { runBlocking{mockRepository.getMovies(UseCaseInput.None)} } returns UseCaseOutput.Error(
+        every { runBlocking{mockRepository.getMovies(UseCaseInputPort.None)} } returns UseCaseOutputPort.Error(
             Failures.ServerException(
                 Exception()
             )
@@ -123,7 +122,7 @@ internal class MoviesListViewModelTest {
         every { failureObserver.onChanged(any()) } just Runs
 
         val mockRepository = mockk<MoviesRepository>()
-        every { runBlocking {mockRepository.getMovies(UseCaseInput.None)} } returns UseCaseOutput.Error(
+        every { runBlocking {mockRepository.getMovies(UseCaseInputPort.None)} } returns UseCaseOutputPort.Error(
             Failures.ServerException(
                 Exception()
             )

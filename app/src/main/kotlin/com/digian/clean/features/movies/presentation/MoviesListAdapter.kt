@@ -13,7 +13,7 @@ import com.digian.clean.features.movies.domain.entities.MovieEntity
  */
 internal class MoviesListAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<MoviesListAdapter.MovieViewHolder>() {
 
-    internal var data: List<MovieEntity>? = null
+    var data: List<MovieEntity>? = null
 
     class MovieViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView) {
         fun bind(movieEntity: MovieEntity, onItemClickListener: OnItemClickListener) {

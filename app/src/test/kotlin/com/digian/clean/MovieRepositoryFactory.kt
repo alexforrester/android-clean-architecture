@@ -3,8 +3,8 @@ package com.digian.clean
 import com.digian.clean.core.data.exception.Failures
 import com.digian.clean.core.data.platform.NetworkHandler
 import com.digian.clean.core.domain.exception.Failure
-import com.digian.clean.core.domain.usecases.UseCaseInput
-import com.digian.clean.core.domain.usecases.UseCaseOutput
+import com.digian.clean.core.domain.ports.UseCaseInputPort
+import com.digian.clean.core.domain.ports.UseCaseOutputPort
 import com.digian.clean.features.movies.data.repository.ASSET_BASE_PATH
 import com.digian.clean.features.movies.data.repository.MoviesRepositoryImpl
 import com.digian.clean.features.movies.domain.entities.MovieEntity
@@ -44,8 +44,8 @@ internal object MovieRepositoryFactory {
             return FileInputStream(ASSET_BASE_PATH + fileName)
         }
 
-        override suspend fun getMovies(none: UseCaseInput.None): UseCaseOutput<Failure, List<MovieEntity>> {
-            return UseCaseOutput.Error(Failures.ServerException(Exception()))
+        override suspend fun getMovies(none: UseCaseInputPort.None): UseCaseOutputPort<Failure, List<MovieEntity>> {
+            return UseCaseOutputPort.Error(Failures.ServerException(Exception()))
         }
     }
 }

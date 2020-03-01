@@ -1,4 +1,4 @@
-package com.digian.clean.core.domain.usecases
+package com.digian.clean.core.domain.ports
 
 import com.digian.clean.core.data.exception.Failures
 import com.digian.clean.core.data.exception.NETWORK_UNAVAILABLE
@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.Test
 
-internal class UseCaseOutputTest {
+internal class UseCaseOutputPortTest {
 
     @Test
     fun `UseCaseOutput Success should return correct type`() {
-        val result = UseCaseOutput.Success("some example")
+        val result = UseCaseOutputPort.Success("some example")
 
         result.successOrError({
             fail()
@@ -22,7 +22,7 @@ internal class UseCaseOutputTest {
 
     @Test
     fun `UseCaseOutput Error should return correct type`() {
-        val result = UseCaseOutput.Error(
+        val result = UseCaseOutputPort.Error(
             Failures.NetworkUnavailable(
                 NetworkConnectionException(
                     NETWORK_UNAVAILABLE

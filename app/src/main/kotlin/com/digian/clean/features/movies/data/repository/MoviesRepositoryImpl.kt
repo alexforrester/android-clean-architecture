@@ -6,8 +6,8 @@ import com.digian.clean.core.data.exception.NETWORK_UNAVAILABLE
 import com.digian.clean.core.data.exception.NetworkConnectionException
 import com.digian.clean.core.data.platform.NetworkHandler
 import com.digian.clean.core.domain.exception.Failure
-import com.digian.clean.core.domain.usecases.UseCaseInput
-import com.digian.clean.core.domain.usecases.UseCaseOutput
+import com.digian.clean.core.domain.ports.UseCaseInputPort
+import com.digian.clean.core.domain.ports.UseCaseOutputPort
 import com.digian.clean.features.movies.data.MovieData
 import com.digian.clean.features.movies.data.exception.MovieCollectionException
 import com.digian.clean.features.movies.data.mappers.MovieDataEntityMapper
@@ -34,45 +34,45 @@ open class MoviesRepositoryImpl(
     private val networkHandler: NetworkHandler
 ) : MoviesRepository {
 
-    override suspend fun getMovieDetail(movieIdInput: UseCaseInput.Single<Int>): UseCaseOutput<Failure, MovieEntity> {
+    override suspend fun getMovieDetail(movieIdInputPort: UseCaseInputPort.Single<Int>): UseCaseOutputPort<Failure, MovieEntity> {
 
         if (!networkHandler.isConnected) {
-            return UseCaseOutput.Error(Failures.NetworkUnavailable(NetworkConnectionException(NETWORK_UNAVAILABLE)))
+            return UseCaseOutputPort.Error(Failures.NetworkUnavailable(NetworkConnectionException(NETWORK_UNAVAILABLE)))
         }
 
-        val movieId = movieIdInput.data
+        val movieId = movieIdInputPort.data
         val movies = getMovieEntities()
 
         return try {
 
-            UseCaseOutput.Success(movies.single {
+            UseCaseOutputPort.Success(movies.single {
                 it.id == movieId
             })
 
         } catch (iae: IllegalArgumentException) {
-            UseCaseOutput.Error(MovieCollectionException(iae))
+            UseCaseOutputPort.Error(MovieCollectionException(iae))
         } catch (nse: NoSuchElementException) {
-            UseCaseOutput.Error(MovieCollectionException(nse))
+            UseCaseOutputPort.Error(MovieCollectionException(nse))
         } catch (exception: Exception) {
-            UseCaseOutput.Error(Failures.ServerException(exception))
+            UseCaseOutputPort.Error(Failures.ServerException(exception))
         }
     }
 
-    override suspend fun getMovies(none: UseCaseInput.None): UseCaseOutput<Failure, List<MovieEntity>> {
+    override suspend fun getMovies(none: UseCaseInputPort.None): UseCaseOutputPort<Failure, List<MovieEntity>> {
 
         if (!networkHandler.isConnected) {
-            return UseCaseOutput.Error(Failures.NetworkUnavailable(NetworkConnectionException(NETWORK_UNAVAILABLE)))
+            return UseCaseOutputPort.Error(Failures.NetworkUnavailable(NetworkConnectionException(NETWORK_UNAVAILABLE)))
         }
 
         return try {
 
             val moviesEntities = getMovieEntities()
-            UseCaseOutput.Success(moviesEntities)
+            UseCaseOutputPort.Success(moviesEntities)
 
         } catch (jsonDataException: JsonDataException) {
-            UseCaseOutput.Error(Failures.ParsingException(jsonDataException))
+            UseCaseOutputPort.Error(Failures.ParsingException(jsonDataException))
         } catch (exception: Exception) {
-            UseCaseOutput.Error(Failures.ServerException(exception))
+            UseCaseOutputPort.Error(Failures.ServerException(exception))
         }
 
     }

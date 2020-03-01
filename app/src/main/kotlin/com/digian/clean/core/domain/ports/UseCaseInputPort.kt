@@ -1,11 +1,11 @@
-package com.digian.clean.core.domain.usecases
+package com.digian.clean.core.domain.ports
 
 /**
  * Created by Alex Forrester on 2019-07-12.
  *
  * UserCaseInput ports
 */
-sealed class UseCaseInput {
+sealed class UseCaseInputPort {
 
     object None
     class Single<Data: Any>(val data: Data)
