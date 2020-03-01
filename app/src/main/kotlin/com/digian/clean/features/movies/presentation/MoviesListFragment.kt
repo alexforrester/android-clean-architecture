@@ -66,17 +66,17 @@ class MoviesListFragment : Fragment() {
             )
         }
 
-        moviesListViewModel.movies.observe(this,
+        moviesListViewModel.movies.observe(MoviesListFragment@this,
             Observer<List<MovieEntity>> { popularMovies ->
                 moviesListAdapter.data = popularMovies
                 moviesListAdapter.notifyDataSetChanged()
             })
 
-        moviesListViewModel.failure.observe(this,
+        moviesListViewModel.failure.observe(MoviesListFragment@this,
             Observer { failure ->
                 Toast.makeText(
                     activity,
-                    getString(R.string.movie_detail_loading_error).plus((failure as? Failures)?.exception?.message),
+                    getString(R.string.movie_list_loading_error).plus((failure as? Failures)?.exception?.message),
                     Toast.LENGTH_LONG
                 ).show()
             })

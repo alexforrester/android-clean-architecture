@@ -20,10 +20,9 @@
             android:id="@+id/movie_image"
             style="@style/MovieImage"
             android:contentDescription="@string/movie_image"
-            android:layout_width="wrap_content"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/movie_description"
             app:layout_constraintTop_toBottomOf="@id/movie_title"/>
 
     <TextView

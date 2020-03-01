@@ -21,6 +21,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 const val UNKNOWN_MOVIE_ID = 0
 const val IMAGE_URL_AND_PATH = "https://image.tmdb.org/t/p/w400"
@@ -67,7 +68,7 @@ class MovieDetailFragment : Fragment() {
         val movieId: Int = arguments?.getInt("movieId") ?: UNKNOWN_MOVIE_ID
 
         //Loads movie detail and returns from observer or displays error view
-        movieDetailViewModel.movie.observe(this,
+        movieDetailViewModel.movie.observe(MovieDetailFragment@this,
             Observer<MovieEntity> { movie ->
 
                 movie?.let { movieDetail ->
@@ -91,7 +92,7 @@ class MovieDetailFragment : Fragment() {
 
             })
 
-        movieDetailViewModel.failure.observe(this,
+        movieDetailViewModel.failure.observe(MovieDetailFragment@this,
             Observer { failure ->
                 addErrorView(failure as? Failures)
             })
@@ -123,15 +124,17 @@ class MovieDetailFragment : Fragment() {
         picasso
             .load(uri)
             .error(R.drawable.ic_error_black_80dp)
+            .noFade()
             .placeholder(R.drawable.placeholder460_690)
             .into(movie_image, object : Callback {
                 override fun onSuccess() {
-                    Log.d(PICASSO_RESULT, "onSuccess")
+                    Timber.d("%s onSuccess", PICASSO_RESULT)
                 }
 
                 override fun onError(e: Exception?) {
-                    Log.e(PICASSO_RESULT, "onError", e)
+                    Timber.d("%s onFailure", PICASSO_RESULT)
                 }
             })
+
     }
 }
