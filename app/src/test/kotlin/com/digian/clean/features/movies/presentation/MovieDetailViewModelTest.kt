@@ -7,7 +7,7 @@ import com.digian.clean.MoviesLifeCycleOwner
 import com.digian.clean.core.domain.exception.Failure
 import com.digian.clean.features.movies.domain.entities.GenreEntity
 import com.digian.clean.features.movies.domain.entities.MovieEntity
-import com.digian.clean.features.movies.domain.usecases.GetMovieDetailUseCase
+import com.digian.clean.features.movies.domain.usecases.MovieDetailUseCase
 import io.mockk.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.newSingleThreadContext
@@ -15,7 +15,6 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
@@ -30,7 +29,7 @@ internal class MovieDetailViewModelTest {
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")
 
     private val moviesDetailViewModel: MovieDetailViewModel = MovieDetailViewModel(
-        GetMovieDetailUseCase(MovieRepositoryFactory.movieRepository)
+        MovieDetailUseCase(MovieRepositoryFactory.movieRepository)
     )
 
     @BeforeEach

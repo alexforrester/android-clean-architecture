@@ -5,8 +5,8 @@ import com.digian.clean.features.movies.data.adapters.GenreAdapter
 import com.digian.clean.features.movies.data.api.MoviesAPI
 import com.digian.clean.features.movies.data.repository.MoviesRepositoryImpl
 import com.digian.clean.features.movies.domain.repository.MoviesRepository
-import com.digian.clean.features.movies.domain.usecases.GetMovieDetailUseCase
-import com.digian.clean.features.movies.domain.usecases.GetMoviesUseCase
+import com.digian.clean.features.movies.domain.usecases.MovieDetailUseCase
+import com.digian.clean.features.movies.domain.usecases.MoviesUseCase
 import com.digian.clean.features.movies.presentation.MovieDetailViewModel
 import com.digian.clean.features.movies.presentation.MoviesListViewModel
 import com.squareup.moshi.Moshi
@@ -38,8 +38,8 @@ val appModules = module {
         NetworkHandler(androidContext())
     }
 
-    factory { GetMovieDetailUseCase(get()) }
-    factory { GetMoviesUseCase(get()) }
+    factory { MovieDetailUseCase(get()) }
+    factory { MoviesUseCase(get()) }
 
     viewModel { MoviesListViewModel(get()) }
     viewModel { MovieDetailViewModel(get()) }

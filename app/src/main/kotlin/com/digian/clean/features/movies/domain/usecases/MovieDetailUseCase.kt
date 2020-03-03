@@ -9,7 +9,7 @@ import com.digian.clean.features.movies.domain.repository.MoviesRepository
 /**
  * Created by Alex Forrester on 2019-07-12.
  */
-class GetMovieDetailUseCase(private val moviesRepository: MoviesRepository) {
+class MovieDetailUseCase(private val moviesRepository: MoviesRepository) {
 
     suspend operator fun invoke(movieIdInputPort: UseCaseInputPort.Single<Int>): UseCaseOutputPort<Failure, MovieEntity> = moviesRepository.getMovieDetail(movieIdInputPort)
 }

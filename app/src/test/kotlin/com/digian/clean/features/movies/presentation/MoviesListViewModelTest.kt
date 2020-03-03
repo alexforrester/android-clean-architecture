@@ -10,7 +10,7 @@ import com.digian.clean.core.domain.ports.UseCaseInputPort
 import com.digian.clean.core.domain.ports.UseCaseOutputPort
 import com.digian.clean.features.movies.domain.entities.MovieEntity
 import com.digian.clean.features.movies.domain.repository.MoviesRepository
-import com.digian.clean.features.movies.domain.usecases.GetMoviesUseCase
+import com.digian.clean.features.movies.domain.usecases.MoviesUseCase
 import io.mockk.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.newSingleThreadContext
@@ -19,7 +19,6 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
@@ -32,11 +31,11 @@ import org.junit.jupiter.api.extension.ExtendWith
 internal class MoviesListViewModelTest {
 
     private val moviesListViewModel: MoviesListViewModel = MoviesListViewModel(
-        GetMoviesUseCase(MovieRepositoryFactory.movieRepository)
+        MoviesUseCase(MovieRepositoryFactory.movieRepository)
     )
 
     private val moviesListViewModelWithFailureRepoGetMovies: MoviesListViewModel = MoviesListViewModel(
-        GetMoviesUseCase(MovieRepositoryFactory.movieRepositoryFailure)
+        MoviesUseCase(MovieRepositoryFactory.movieRepositoryFailure)
     )
 
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")

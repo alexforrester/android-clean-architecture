@@ -1,5 +1,6 @@
 package com.digian.clean.features.movies.presentation
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,14 +8,14 @@ import com.digian.clean.core.domain.exception.Failure
 import com.digian.clean.core.domain.ports.UseCaseInputPort
 import com.digian.clean.core.domain.ports.UseCaseOutputPort
 import com.digian.clean.features.movies.domain.entities.MovieEntity
-import com.digian.clean.features.movies.domain.usecases.GetMoviesUseCase
+import com.digian.clean.features.movies.domain.usecases.MoviesUseCase
 import kotlinx.coroutines.*
 import timber.log.Timber
 
 /**
  * Created by Alex Forrester on 23/04/20
  */
-class MoviesListViewModel(val getMoviesUseCase: GetMoviesUseCase) : ViewModel() {
+class MoviesListViewModel(val moviesUseCase: MoviesUseCase) : ViewModel() {
 
     val failure: MutableLiveData<Failure> = MutableLiveData()
     val movies: MutableLiveData<List<MovieEntity>> = MutableLiveData()
@@ -29,7 +30,7 @@ class MoviesListViewModel(val getMoviesUseCase: GetMoviesUseCase) : ViewModel() 
 
     private suspend fun getMovieList(): UseCaseOutputPort<Failure, List<MovieEntity>> =
         withContext(Dispatchers.IO) {
-            getMoviesUseCase(UseCaseInputPort.None)
+            moviesUseCase(UseCaseInputPort.None)
         }
 
     private fun handleFailure(failure: Failure) {

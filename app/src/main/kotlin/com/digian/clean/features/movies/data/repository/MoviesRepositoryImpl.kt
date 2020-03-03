@@ -41,10 +41,10 @@ open class MoviesRepositoryImpl(
         }
 
         val movieId = movieIdInputPort.data
-        val movies = getMovieEntities()
 
         return try {
 
+            val movies = getMovieEntities()
             UseCaseOutputPort.Success(movies.single {
                 it.id == movieId
             })
@@ -85,6 +85,7 @@ open class MoviesRepositoryImpl(
 
         val moviesData = adapter.fromJson(moviesJson) ?: listOf()
 
+        //Not inlined to show Mapping more explicitly
         val moviesEntities = moviesData.flatMap {
             listOf(MovieDataEntityMapper.mapFrom(it))
         }

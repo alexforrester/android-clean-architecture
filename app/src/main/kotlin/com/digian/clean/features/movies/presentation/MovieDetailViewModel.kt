@@ -7,7 +7,7 @@ import com.digian.clean.core.domain.exception.Failure
 import com.digian.clean.core.domain.ports.UseCaseInputPort
 import com.digian.clean.core.domain.ports.UseCaseOutputPort
 import com.digian.clean.features.movies.domain.entities.MovieEntity
-import com.digian.clean.features.movies.domain.usecases.GetMovieDetailUseCase
+import com.digian.clean.features.movies.domain.usecases.MovieDetailUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 /**
  * Created by Alex Forrester on 23/04/2019.
  */
-class MovieDetailViewModel(val getMovieDetailUseCase: GetMovieDetailUseCase) : ViewModel() {
+class MovieDetailViewModel(val movieDetailUseCase: MovieDetailUseCase) : ViewModel() {
 
     val failure: MutableLiveData<Failure> = MutableLiveData()
     val movie: MutableLiveData<MovieEntity> = MutableLiveData()
@@ -31,7 +31,7 @@ class MovieDetailViewModel(val getMovieDetailUseCase: GetMovieDetailUseCase) : V
 
     private suspend fun getMovieDetail(movieId: Int) : UseCaseOutputPort<Failure,MovieEntity> =
         withContext(Dispatchers.IO) {
-            getMovieDetailUseCase(UseCaseInputPort.Single(movieId))
+            movieDetailUseCase(UseCaseInputPort.Single(movieId))
         }
 
     private fun handleFailure(failure: Failure) {
