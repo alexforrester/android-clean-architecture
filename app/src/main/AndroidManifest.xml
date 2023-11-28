@@ -16,7 +16,7 @@
             android:networkSecurityConfig="@xml/network_security_config" tools:ignore="GoogleAppIndexingWarning"
             tools:targetApi="29">
 
-        <activity android:name=".features.movies.presentation.MoviesActivity">
+        <activity android:name=".features.movies.presentation.MoviesActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

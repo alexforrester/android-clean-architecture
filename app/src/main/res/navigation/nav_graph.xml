@@ -14,7 +14,7 @@
         <action
                 android:id="@+id/action_moviesFragment_to_movieDetailFragment"
                 app:destination="@id/movieDetailFragment">
-            <argument android:name="movieId" app:argType="integer" android:defaultValue="-1"/>
+            <argument android:name="movied" app:argType="integer" android:defaultValue="-1"/>
         </action>
     </fragment>
 

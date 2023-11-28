@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,10 +44,10 @@ class MoviesListFragment : Fragment() {
         moviesViewManager = LinearLayoutManager(this.context)
         moviesListAdapter = MoviesListAdapter(object : OnItemClickListener {
             override fun onItemClick(movieEntity: MovieEntity) {
-                val action = MoviesListFragmentDirections.actionMoviesFragmentToMovieDetailFragment(
-                    movieEntity.id
-                )
-                findNavController().navigate(action)
+
+                val bundle = Bundle()
+                bundle.putInt("movieId", movieEntity.id)
+                view?.let { Navigation.findNavController(it).navigate(R.id.movieDetailFragment, bundle) };
             }
 
         })
